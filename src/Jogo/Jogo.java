@@ -2,8 +2,6 @@ package Jogo;
 
 import javax.swing.*;
 
-import org.w3c.dom.events.MouseEvent;
-
 import Jogo.Cena.Cena;
 import Jogo.Personagem.Personagem;
 
