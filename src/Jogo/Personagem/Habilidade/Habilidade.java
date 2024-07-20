@@ -7,53 +7,54 @@ import Jogo.Personagem.Personagem;
 public abstract class Habilidade {
 
     protected String spritePath;
-    protected String nome;
-    protected int custo;
-    protected int nivelHabilidade;
-    protected double chanceDeAcerto;
+    protected String name;
+    protected int cost;
+    protected int skillLevel;
+    protected double hitChance;
 
-    public static ArrayList<Habilidade> habilidadesCriadas;
+    public static ArrayList<Habilidade> createdSkills;
 
-    //metodos que devem ser criados em todas as habilidades separadamente
-    protected abstract boolean aplicaEfeito(Personagem targetPersonagem);
-    protected abstract boolean melhoraEfeito();
+    // Métodos que devem ser criados em todas as habilidades separadamente
+    protected abstract boolean applyEffect(Personagem targetPersonagem);
+    protected abstract boolean upgradeEffect();
 
-    //getters e setters importantes
-    public int getNivelHabilidade(){
-        return this.nivelHabilidade;
+    // Getters e setters importantes
+    public int getSkillLevel(){
+        return this.skillLevel;
     }
-    public void setNivelHabilidade(int nivel){
-        this.nivelHabilidade = nivel;
+    public void setSkillLevel(int level){
+        this.skillLevel = level;
     }
-    public int getCusto(){
-        return this.custo;
+    public int getCost(){
+        return this.cost;
     }
-    public void setCusto(int newCusto){
-        this.custo = newCusto;
-    }
-
-    //metodos de classe
-    public static ArrayList<Habilidade> consultaHabilidadesCriadas(){
-        return habilidadesCriadas;
-    }
-    public static void adicionaHabilidadeCriada(Habilidade newHabilidade){
-        habilidadesCriadas.add(newHabilidade);
+    public void setCost(int newCost){
+        this.cost = newCost;
     }
 
-    //função de verificação de nivel maximo
+    // Métodos de classe
+    public static ArrayList<Habilidade> getCreatedSkills(){
+        return createdSkills;
+    }
+    public static void addCreatedSkill(Habilidade newSkill){
+        createdSkills.add(newSkill);
+    }
+
+
+    // Função de verificação de level maximo
     public boolean isMaxLevel(){
-        if(this.getNivelHabilidade() == 5){
+        if(this.getSkillLevel() == 5){
             return true;
         }else{
             return false;
         }
     }
     
-    //função que verifica se a habilidade acertou o alvo
+    // Função que verifica se a habilidade acertou o alvo
     public boolean didItHit(){
-        double rolamento = Math.random();
+        double randNum = Math.random();
 
-        if(rolamento > (1.0 - this.chanceDeAcerto)){
+        if(randNum > (1.0 - this.hitChance)){
             return true;
         }else{
             return false;

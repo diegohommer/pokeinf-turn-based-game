@@ -6,23 +6,23 @@ import Jogo.Personagem.Habilidade.Habilidade;
 
 public class Personagem {
     protected String spritePath;
-    protected String nome;
-    protected int vida;
-    protected int escudo;
+    protected String name;
+    protected int life;
+    protected int shield;
     protected int pontosDeHabilidade;
     protected ArrayList<Habilidade> habilidadesAtivas;
     
-    public int getVida() {
-        return vida;
+    public int getLife() {
+        return life;
     }
-    public void setVida(int vida) {
-        this.vida = vida;
+    public void setLife(int life) {
+        this.life = life;
     }
-    public int getEscudo() {
-        return escudo;
+    public int getShield() {
+        return shield;
     }
-    public void setEscudo(int escudo) {
-        this.escudo = escudo;
+    public void setShield(int shield) {
+        this.shield = shield;
     }
     
 

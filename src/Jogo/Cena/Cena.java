@@ -1,23 +1,21 @@
 package Jogo.Cena;
 
-import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Cena extends JPanel{
+public abstract class Cena extends JPanel{
+    protected static final int WINDOW_HEIGHT = 768;
+    protected static final int WINDOW_WIDTH = 1024;
     private Image backgroundSprite;
-    private ArrayList<JPanel> UIComponents;
-    private int window_height, window_width;
+
 
     // Construtor de Cena que recebe o path para o arquivo de imagem da sprite de background e altura/largura da janela
-    public Cena(String spritePath, int window_width, int window_height) {
+    public Cena(String spritePath) {
         try {
             backgroundSprite = ImageIO.read(new File(spritePath));
-            this.window_height = window_height;
-            this.window_width = window_width;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,7 +26,7 @@ public class Cena extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (backgroundSprite != null) {
-            g.drawImage(backgroundSprite, 0, 0, window_width, window_height, this);
+            g.drawImage(backgroundSprite, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         }
     }
 }
