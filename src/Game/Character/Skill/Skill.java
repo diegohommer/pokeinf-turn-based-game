@@ -1,10 +1,10 @@
-package Jogo.Personagem.Habilidade;
+package Game.Character.Skill;
 
 import java.util.ArrayList;
 
-import Jogo.Personagem.Personagem;
+import Game.Character.Character;
 
-public abstract class Habilidade {
+public abstract class Skill {
 
     protected String spritePath;
     protected String name;
@@ -12,10 +12,10 @@ public abstract class Habilidade {
     protected int skillLevel;
     protected double hitChance;
 
-    public static ArrayList<Habilidade> createdSkills;
+    public static ArrayList<Skill> createdSkills;
 
     // Métodos que devem ser criados em todas as habilidades separadamente
-    protected abstract boolean applyEffect(Personagem targetPersonagem);
+    protected abstract boolean applyEffect(Character targetPersonagem);
     protected abstract boolean upgradeEffect();
 
     // Getters e setters importantes
@@ -33,10 +33,10 @@ public abstract class Habilidade {
     }
 
     // Métodos de classe
-    public static ArrayList<Habilidade> getCreatedSkills(){
+    public static ArrayList<Skill> getCreatedSkills(){
         return createdSkills;
     }
-    public static void addCreatedSkill(Habilidade newSkill){
+    public static void addCreatedSkill(Skill newSkill){
         createdSkills.add(newSkill);
     }
 

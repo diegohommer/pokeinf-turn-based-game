@@ -1,9 +1,9 @@
-package Jogo;
+package Game;
 
 import javax.swing.*;
 
-import Jogo.Cena.*;
-import Jogo.Personagem.Personagem;
+import Game.Character.Character;
+import Game.Scene.*;
 
 public class Game extends JFrame {
     public final String WINDOW_TITLE = "PokeINF";
@@ -41,13 +41,13 @@ public class Game extends JFrame {
         }
     }
 
+    // Handle state-based display updates
     private void updateDisplay() {
         this.getContentPane().removeAll();
 
-        // Handle state-based display updates
         switch (getGameState()) {
             case MENU:
-                this.getContentPane().add(new MainMenu(this, "assets//test_background.jpg"));
+                this.getContentPane().add(new MainMenu(this));
                 break;
             case SETTINGS:
                 // Add CONFIGS panel

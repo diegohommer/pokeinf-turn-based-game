@@ -1,12 +1,14 @@
-package Jogo.Cena;
+package Game.Scene;
 
-import Jogo.Game;
 import javax.swing.*;
+
+import Game.Game;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainMenu extends Cena {
+public class MainMenu extends Scene {
     private final String MAIN_MENU_TITLE = "PokeINF";
     private final int TITLE_HEIGHT = 250;
     private final int BUTTON_TOTAL = 4;
@@ -15,12 +17,13 @@ public class MainMenu extends Cena {
     private final int BUTTON_X_POS = (WINDOW_WIDTH - BUTTON_WIDTH) / 2;
     private final int BUTTON_Y_POS = (WINDOW_HEIGHT - BUTTON_HEIGHT) / 2;
     private final int BUTTON_Y_OFFSET = 70;
+    private final String MENU_BACKGROUND = "assets//test_background.jpg";
 
     private Game game;
     private final String[] buttonLabels = {"New Game", "Load Game", "Settings", "Exit"};
 
-    public MainMenu(Game game, String spritePath){
-        super(spritePath);
+    public MainMenu(Game game){
+        super("assets//test_background.jpg");
         this.game = game;
         addTitle();
         addButtons();

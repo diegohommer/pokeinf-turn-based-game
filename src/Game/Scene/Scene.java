@@ -1,4 +1,4 @@
-package Jogo.Cena;
+package Game.Scene;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,14 +6,14 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public abstract class Cena extends JPanel{
+public abstract class Scene extends JPanel{
     protected static final int WINDOW_HEIGHT = 768;
     protected static final int WINDOW_WIDTH = 1024;
     private Image backgroundSprite;
 
 
     // Construtor de Cena que recebe o path para o arquivo de imagem da sprite de background e altura/largura da janela
-    public Cena(String spritePath) {
+    public Scene(String spritePath) {
         try {
             backgroundSprite = ImageIO.read(new File(spritePath));
         } catch (IOException e) {

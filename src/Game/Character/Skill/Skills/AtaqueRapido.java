@@ -1,9 +1,9 @@
-package Jogo.Personagem.Habilidade.Habilidades;
+package Game.Character.Skill.Skills;
 
-import Jogo.Personagem.Personagem;
-import Jogo.Personagem.Habilidade.Habilidade;
+import Game.Character.Character;
+import Game.Character.Skill.Skill;
 
-public class AtaqueRapido extends Habilidade {
+public class AtaqueRapido extends Skill {
     //efeito da classe ataquerapido
     private int damage;
 
@@ -50,7 +50,7 @@ public class AtaqueRapido extends Habilidade {
     }
 
     @Override
-    public boolean applyEffect(Personagem target){
+    public boolean applyEffect(Character target){
         if(this.didItHit()){
             int danoAtual = this.getDamage();
             int escudoAlvo = target.getShield();

@@ -1,16 +1,16 @@
-package Jogo.Personagem;
+package Game.Character;
 
 import java.util.ArrayList;
 
-import Jogo.Personagem.Habilidade.Habilidade;
+import Game.Character.Skill.Skill;
 
-public class Personagem {
+public class Character {
     protected String spritePath;
     protected String name;
     protected int life;
     protected int shield;
     protected int pontosDeHabilidade;
-    protected ArrayList<Habilidade> habilidadesAtivas;
+    protected ArrayList<Skill> habilidadesAtivas;
     
     public int getLife() {
         return life;
