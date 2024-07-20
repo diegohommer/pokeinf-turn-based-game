@@ -12,13 +12,16 @@ public abstract class Skill {
     protected int skillLevel;
     protected double hitChance;
 
-    public static ArrayList<Skill> createdSkills;
+    public static ArrayList<Skill> createdSkills = new ArrayList<>();
 
     // Métodos que devem ser criados em todas as habilidades separadamente
     protected abstract boolean applyEffect(Character targetPersonagem);
     protected abstract boolean upgradeEffect();
 
     // Getters e setters importantes
+    public String getName() {
+        return name;
+    }
     public int getSkillLevel(){
         return this.skillLevel;
     }
