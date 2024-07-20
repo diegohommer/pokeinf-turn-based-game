@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import Game.Character.Skill.Skill;
 
-public class Character {
+public abstract class Character {
     protected String spritePath;
     protected String name;
     protected int life;
     protected int shield;
-    protected int pontosDeHabilidade;
-    protected ArrayList<Skill> habilidadesAtivas;
+    protected int skillPoints;
+    protected ArrayList<Skill> activeSkills;
     
+
     public int getLife() {
         return life;
     }
@@ -24,6 +25,13 @@ public class Character {
     public void setShield(int shield) {
         this.shield = shield;
     }
+    public ArrayList<Skill> getActiveSkills() {
+        return activeSkills;
+    }
+    public void setActiveSkills(ArrayList<Skill> activeSkills) {
+        this.activeSkills = activeSkills;
+    }
     
+    public abstract Skill selectSkill(int selectedSkill);
 
 }
