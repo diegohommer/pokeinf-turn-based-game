@@ -10,6 +10,8 @@ public class Game extends JFrame {
     public final int WINDOW_HEIGHT = 768;
     public final int WINDOW_WIDTH = 1024;
 
+    private final String MENU_BACKGROUND = "assets//test_background.jpg";
+
     public enum STATE {
         MENU,
         SETTINGS,
@@ -47,7 +49,7 @@ public class Game extends JFrame {
 
         switch (getGameState()) {
             case MENU:
-                this.getContentPane().add(new MainMenu(this));
+                this.getContentPane().add(new MainMenu(this, MENU_BACKGROUND));
                 break;
             case SETTINGS:
                 // Add CONFIGS panel

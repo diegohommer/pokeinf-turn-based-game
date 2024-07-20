@@ -17,13 +17,12 @@ public class MainMenu extends Scene {
     private final int BUTTON_X_POS = (WINDOW_WIDTH - BUTTON_WIDTH) / 2;
     private final int BUTTON_Y_POS = (WINDOW_HEIGHT - BUTTON_HEIGHT) / 2;
     private final int BUTTON_Y_OFFSET = 70;
-    private final String MENU_BACKGROUND = "assets//test_background.jpg";
 
     private Game game;
     private final String[] buttonLabels = {"New Game", "Load Game", "Settings", "Exit"};
 
-    public MainMenu(Game game){
-        super("assets//test_background.jpg");
+    public MainMenu(Game game, String spritePath){
+        super(spritePath);
         this.game = game;
         addTitle();
         addButtons();
