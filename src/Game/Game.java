@@ -2,15 +2,17 @@ package Game;
 
 import javax.swing.*;
 
-import Game.Character.Character;
+import Game.Character.*;
 import Game.Scene.*;
 
 public class Game extends JFrame {
     public final String WINDOW_TITLE = "PokeINF";
     public final int WINDOW_HEIGHT = 768;
     public final int WINDOW_WIDTH = 1024;
+    private final String PLAYER_NAME = "Dennis";
 
     private final String MENU_BACKGROUND = "assets//test_background.jpg";
+    private Player player;
 
     public enum STATE {
         MENU,
@@ -27,7 +29,20 @@ public class Game extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
+        setPlayer(new Player(PLAYER_NAME));
         setGameState(STATE.MENU);
+    }
+
+    public Player getPlayer(){
+        return this.player;
+    }
+    public boolean setPlayer(Player player){
+        try {
+            this.player = player;
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
     public STATE getGameState(){
