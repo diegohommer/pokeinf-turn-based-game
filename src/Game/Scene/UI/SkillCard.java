@@ -24,37 +24,53 @@ public class SkillCard extends JPanel{
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
         setBackground(Color.WHITE);
 
-        // BELLOW LIES THE FRONT-END CHAOS, PROCEED WITH CAUTION
+        // "Container" for the card display
         JPanel cardPanel = new JPanel();
         cardPanel.setLayout(new BorderLayout());
         cardPanel.setOpaque(false);
 
-        JLabel headerLabel = new JLabel(skill.getName());
+        // Create and add the components to the container
+        JLabel headerLabel = createHeader(skill.getName());
+        JTextArea bodyTextArea = createBody(skill.getDescription());
+        JSeparator separator = createSeparator();
+        cardPanel.add(headerLabel, BorderLayout.NORTH);
+        cardPanel.add(separator, BorderLayout.CENTER); 
+        cardPanel.add(bodyTextArea, BorderLayout.SOUTH);
+
+        // Add the container and it's content to the SkillCard panel
+        this.add(cardPanel, BorderLayout.CENTER);
+
+        // Create and add the button under the card
+        JButton actionButton = createButton(skill, player, game);
+        this.add(actionButton, BorderLayout.SOUTH);
+    }
+
+    private JLabel createHeader(String skillName){
+        JLabel headerLabel = new JLabel(skillName);
         headerLabel.setFont(new Font("Arial", Font.BOLD, CARD_TITLE_SIZE));
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        return headerLabel;
+    }
 
-        JTextArea bodyTextArea = new JTextArea(skill.getDescription());
+    private JTextArea createBody(String skillDescription){
+        JTextArea bodyTextArea = new JTextArea(skillDescription);
         bodyTextArea.setFont(new Font("Arial", Font.PLAIN, CARD_DESC_SIZE));
         bodyTextArea.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - BUTTON_HEIGHT));
         bodyTextArea.setEditable(false);
         bodyTextArea.setBackground(Color.WHITE);
         bodyTextArea.setLineWrap(true);
         bodyTextArea.setWrapStyleWord(true);
+        return bodyTextArea;
+    }
 
-        // Create a separator
+    private JSeparator createSeparator(){
         JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
-        separator.setPreferredSize(new Dimension(CARD_WIDTH, 1)); // Adjust height as needed
+        separator.setPreferredSize(new Dimension(CARD_WIDTH, 1)); 
         separator.setBackground(Color.BLACK);
- 
-        // Add components to the card panel
-        cardPanel.add(headerLabel, BorderLayout.NORTH);
-        cardPanel.add(separator, BorderLayout.CENTER); // Add separator between header and body
-        cardPanel.add(bodyTextArea, BorderLayout.SOUTH);
+        return separator;
+    }
 
-        add(cardPanel, BorderLayout.CENTER);
-        // FRONT-END SHENANIGANS END
-
-        // Add the button and determine what happens when it's clicked
+    private JButton createButton(Skill skill, Player player, Game game){
         JButton actionButton = new JButton("Select Skill");
         actionButton.setPreferredSize(new Dimension(CARD_WIDTH, BUTTON_HEIGHT));
         actionButton.addActionListener(new ActionListener() {
@@ -64,7 +80,6 @@ public class SkillCard extends JPanel{
                 game.setGameState(Game.STATE.BATTLE);
             }
         });
-
-        add(actionButton, BorderLayout.SOUTH);
+        return actionButton;
     }
 }
