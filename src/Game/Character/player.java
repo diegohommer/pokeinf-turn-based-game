@@ -7,7 +7,7 @@ import java.util.Iterator;
 import Game.Character.Skill.Skill;
 import Game.Character.Skill.Skills.ErrorSkill;
 
-public class player extends Character{
+public class Player extends Character{
     private ArrayList<Skill> unlockedSkillsList;
 
     private final int LP_INITIAL = 100;
@@ -16,7 +16,7 @@ public class player extends Character{
     private final int MAX_SKILL_INDEX = 3;
     private final String SPRITE_PATH = "#toDo";
 
-    public player(String name){
+    public Player(String name){
         this.name = name;
         this.life = LP_INITIAL;
         this.skillPoints = SP_INITIAL;

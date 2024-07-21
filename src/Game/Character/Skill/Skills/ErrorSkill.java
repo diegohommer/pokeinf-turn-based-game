@@ -9,6 +9,7 @@ public class ErrorSkill extends Skill{
         this.cost = 0;
         this.hitChance = 0;
         this.skillLevel = 0;
+        this.description = "Não existe";
     }
     @Override
     protected boolean applyEffect(Character targetPersonagem) {

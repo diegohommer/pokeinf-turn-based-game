@@ -11,6 +11,7 @@ public abstract class Skill {
     protected int cost;
     protected int skillLevel;
     protected double hitChance;
+    protected String description;
 
     public static ArrayList<Skill> createdSkills = new ArrayList<>();
 
@@ -33,6 +34,17 @@ public abstract class Skill {
     }
     public void setCost(int newCost){
         this.cost = newCost;
+    }
+    public String getDescription(){
+        return this.description;
+    }
+    public boolean setDescription(String description){
+        try{
+            this.description = description;
+            return true;
+        } catch(Exception e){
+            return false;
+        }
     }
 
     // Métodos de classe

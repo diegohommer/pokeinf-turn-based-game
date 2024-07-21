@@ -3,14 +3,13 @@ package Game.Scene;
 import javax.swing.*;
 
 import Game.Game;
+import Game.Character.Player;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainMenu extends Scene {
-    private final String MAIN_MENU_TITLE = "PokeINF";
-    private final int TITLE_HEIGHT = 250;
+public class Battle extends Scene{
     private final int BUTTON_TOTAL = 4;
     private final int BUTTON_WIDTH = 200;
     private final int BUTTON_HEIGHT = 50;
@@ -21,23 +20,11 @@ public class MainMenu extends Scene {
     private Game game;
     private final String[] buttonLabels = {"New Game", "Load Game", "Settings", "Exit"};
 
-    public MainMenu(Game game, String spritePath){
+    public Battle(Game game, String spritePath){
         super(spritePath);
         this.game = game;
-        addTitle();
         addButtons();
     }
-
-    private void addTitle() {
-        JLabel titleLabel = new JLabel(MAIN_MENU_TITLE);
-        titleLabel.setBounds(0, 0, WINDOW_WIDTH, TITLE_HEIGHT);
-        titleLabel.setForeground(Color.WHITE); // Set text color
-        titleLabel.setFont(new Font("Courier New", Font.BOLD, 100));
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        titleLabel.setVerticalAlignment(JLabel.CENTER);
-        add(titleLabel);
-    }
-
     
     private void addButtons() {
         JButton newButton;
@@ -69,7 +56,7 @@ public class MainMenu extends Scene {
     private void handleButtonClick(String buttonLabel) {
         switch (buttonLabel) {
             case "New Game":
-                game.setGameState(Game.STATE.CHOOSE_SKILL);
+                game.setGameState(Game.STATE.BATTLE);
                 break;
             case "Load Game":
                 System.out.println("Load Game clicked");
@@ -84,5 +71,4 @@ public class MainMenu extends Scene {
                 throw new IllegalArgumentException("Unknown button label: " + buttonLabel);
         }
     }
-
 }
