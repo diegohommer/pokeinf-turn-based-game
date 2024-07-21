@@ -11,11 +11,11 @@ import java.awt.event.ActionListener;
 import Game.Character.Skill.Skill;
 
 public class SkillCard extends JPanel{
-    private final int CARD_TITLE_SIZE = 16;
-    private final int CARD_DESC_SIZE = 12;
-    private final int BUTTON_HEIGHT = 40;
     private final int CARD_HEIGHT = 400;
     private final int CARD_WIDTH = 300;
+    private final int CARD_TITLE_SIZE = 25;
+    private final int CARD_DESC_SIZE = 12;
+    private final int BUTTON_HEIGHT = 40;
 
     public SkillCard(Skill skill, Player player, Game game) {
         super();
@@ -35,13 +35,22 @@ public class SkillCard extends JPanel{
 
         JTextArea bodyTextArea = new JTextArea(skill.getDescription());
         bodyTextArea.setFont(new Font("Arial", Font.PLAIN, CARD_DESC_SIZE));
+        bodyTextArea.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - BUTTON_HEIGHT));
         bodyTextArea.setEditable(false);
         bodyTextArea.setBackground(Color.WHITE);
         bodyTextArea.setLineWrap(true);
         bodyTextArea.setWrapStyleWord(true);
 
+        // Create a separator
+        JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
+        separator.setPreferredSize(new Dimension(CARD_WIDTH, 1)); // Adjust height as needed
+        separator.setBackground(Color.BLACK);
+ 
+        // Add components to the card panel
         cardPanel.add(headerLabel, BorderLayout.NORTH);
-        cardPanel.add(bodyTextArea, BorderLayout.CENTER);
+        cardPanel.add(separator, BorderLayout.CENTER); // Add separator between header and body
+        cardPanel.add(bodyTextArea, BorderLayout.SOUTH);
+
         add(cardPanel, BorderLayout.CENTER);
         // FRONT-END SHENANIGANS END
 
@@ -52,7 +61,7 @@ public class SkillCard extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.addSkill(skill);
-                JOptionPane.showMessageDialog(null, "Skill: " + skill.getName());
+                game.setGameState(Game.STATE.BATTLE);
             }
         });
 

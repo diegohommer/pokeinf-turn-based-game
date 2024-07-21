@@ -10,13 +10,6 @@ import java.util.ArrayList;
 import java.awt.FlowLayout;
 
 public class ChooseSkill extends Scene {    
-    private final int CARD_TITLE_SIZE = 16;
-    private final int CARD_DESC_SIZE = 12;
-    private final int BUTTON_HEIGHT = 40;
-    private final int CARD_HEIGHT = 500;
-    private final int CARD_WIDTH = 300;
-
-
     private ArrayList<Skill> skills;
     private Player player;
     private Game game;

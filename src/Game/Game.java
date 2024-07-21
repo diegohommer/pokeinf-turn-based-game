@@ -32,7 +32,7 @@ public class Game extends JFrame {
         setResizable(false);
         setLayout(new BorderLayout());
         setPlayer(new Player(PLAYER_NAME));
-        setGameState(STATE.CHOOSE_SKILL);
+        setGameState(STATE.MENU);
     }
 
     public Player getPlayer(){
