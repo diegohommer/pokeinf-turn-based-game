@@ -19,8 +19,11 @@ public class Player extends Character{
     public Player(String name){
         this.name = name;
         this.life = LP_INITIAL;
+        this.maxLife = LP_INITIAL;
         this.skillPoints = SP_INITIAL;
+        this.maxSkillPoints = SP_INITIAL;
         this.shield = SH_INITIAL;
+        this.maxShield = SH_INITIAL;
         this.spritePath = SPRITE_PATH;
         this.activeSkills = new ArrayList<>(Arrays.asList(new ErrorSkill(), new ErrorSkill(), new ErrorSkill(), new ErrorSkill()));
         this.unlockedSkillsList = new ArrayList<>();
