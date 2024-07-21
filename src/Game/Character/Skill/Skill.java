@@ -13,6 +13,10 @@ public abstract class Skill {
     protected double hitChance;
     protected String description;
 
+    //constante de controle
+    private final int MAX_LEVEL = 5;
+
+    //variavel de classe
     public static ArrayList<Skill> createdSkills = new ArrayList<>();
 
     // Métodos que devem ser criados em todas as habilidades separadamente
@@ -46,6 +50,12 @@ public abstract class Skill {
             return false;
         }
     }
+    public double getHitChance() {
+        return hitChance;
+    }
+    public void setHitChance(double hitChance) {
+        this.hitChance = hitChance;
+    }
 
     // Métodos de classe
     public static ArrayList<Skill> getCreatedSkills(){
@@ -58,7 +68,7 @@ public abstract class Skill {
 
     // Função de verificação de level maximo
     public boolean isMaxLevel(){
-        if(this.getSkillLevel() == 5){
+        if(this.getSkillLevel() == MAX_LEVEL){
             return true;
         }else{
             return false;
@@ -69,7 +79,7 @@ public abstract class Skill {
     public boolean didItHit(){
         double randNum = Math.random();
 
-        if(randNum > (1.0 - this.hitChance)){
+        if(randNum > (1.0 - this.getHitChance())){
             return true;
         }else{
             return false;
