@@ -3,9 +3,20 @@ package Game.Scene;
 import Game.Game;
 import Game.Character.*;
 import Game.Character.Skill.*;
-import java.util.ArrayList;
+import Game.Character.Skill.Skills.*;
+import Game.Scene.UI.SkillCard;
 
-public class ChooseSkill extends Scene {
+import java.util.ArrayList;
+import java.awt.FlowLayout;
+
+public class ChooseSkill extends Scene {    
+    private final int CARD_TITLE_SIZE = 16;
+    private final int CARD_DESC_SIZE = 12;
+    private final int BUTTON_HEIGHT = 40;
+    private final int CARD_HEIGHT = 500;
+    private final int CARD_WIDTH = 300;
+
+
     private ArrayList<Skill> skills;
     private Player player;
     private Game game;
@@ -15,9 +26,19 @@ public class ChooseSkill extends Scene {
         super(spritePath);
         setPlayer(player);
         setGame(game);
+
+        // PLACEHOLDER -> DEVEMOS TER UM MÉTODO PARA SORTEAR NOVAS SKILLS A SEREM ADICIONADAS
+        this.skills = new ArrayList<>(); 
+        skills.add(new AtaqueRapido());
+        skills.add(new ErrorSkill());
+        // PLACEHOLDER
+
         addSkillCards();
     }
 
+    public Player getPlayer(){
+        return this.player;
+    }
     public boolean setPlayer(Player player){
         try{
             this.player = player;
@@ -25,6 +46,9 @@ public class ChooseSkill extends Scene {
         } catch (Exception e){
             return false;
         }
+    }
+    public Game getGame(){
+        return this.game;
     }
     public boolean setGame(Game game){
         try{
@@ -35,7 +59,12 @@ public class ChooseSkill extends Scene {
         }
     }
 
-
+    // Constructs the skills cards that will be displayed to the player to choose
     private void addSkillCards() {
+        setLayout(new FlowLayout(FlowLayout.CENTER, 50, 100)); // Added horizontal and vertical gaps
+
+        for(Skill skill : skills){
+            add(new SkillCard(skill, this.getPlayer(), this.getGame()));
+        }
     }
 }

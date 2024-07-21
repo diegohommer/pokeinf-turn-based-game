@@ -22,6 +22,7 @@ public class AtaqueRapido extends Skill {
         this.damage=INITIAL_DAMAGE;
         this.hitChance=HIT_CHANCE;
         this.skillLevel=1;
+        this.description = "Ataca por " + this.damage + " de dano";
     }
 
     // Getters e setters importantes para a classe

@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Game.Character.*;
 import Game.Scene.*;
+import java.awt.*;
 
 public class Game extends JFrame {
     public final String WINDOW_TITLE = "PokeINF";
@@ -29,8 +30,9 @@ public class Game extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
+        setLayout(new BorderLayout());
         setPlayer(new Player(PLAYER_NAME));
-        setGameState(STATE.MENU);
+        setGameState(STATE.CHOOSE_SKILL);
     }
 
     public Player getPlayer(){
@@ -73,7 +75,7 @@ public class Game extends JFrame {
                 // Add BATTLE panel
                 break;
             case CHOOSE_SKILL:
-                // Add CHOOSE_SKILL panel
+                this.getContentPane().add(new ChooseSkill(this, getPlayer(), MENU_BACKGROUND));
                 break;
             case CHOOSE_BATTLE:
                 // Add CHOOSE_BATTLE panel

@@ -69,7 +69,7 @@ public class MainMenu extends Scene {
     private void handleButtonClick(String buttonLabel) {
         switch (buttonLabel) {
             case "New Game":
-                game.setGameState(Game.STATE.BATTLE);
+                game.setGameState(Game.STATE.CHOOSE_SKILL);
                 break;
             case "Load Game":
                 System.out.println("Load Game clicked");
