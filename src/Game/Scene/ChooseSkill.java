@@ -1,13 +1,12 @@
 package Game.Scene;
 
-import Game.Game;
 import Game.Character.*;
 import Game.Character.Skill.*;
 import Game.Character.Skill.Skills.*;
+import Game.Game;
 import Game.Scene.UI.SkillCard;
-
-import java.util.ArrayList;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 public class ChooseSkill extends Scene {    
     private ArrayList<Skill> skills;
@@ -22,7 +21,7 @@ public class ChooseSkill extends Scene {
 
         // PLACEHOLDER -> DEVEMOS TER UM MÉTODO PARA SORTEAR NOVAS SKILLS A SEREM ADICIONADAS
         this.skills = new ArrayList<>(); 
-        skills.add(new AtaqueRapido());
+        skills.add(new QuickAttack());
         skills.add(new ErrorSkill());
         // PLACEHOLDER
 

@@ -6,7 +6,7 @@ import Game.Character.Skill.Skill;
 public class Shield extends Skill {
 
     //atributos de efeito
-    private int defensePoints;
+    private int shieldPoints;
 
     //constantes de controle
     private final int INITIAL_COST = 5;
@@ -19,7 +19,7 @@ public class Shield extends Skill {
         this.name="Escudo";
         this.spritePath="#implementar";
         this.cost=INITIAL_COST;
-        this.healPoints=INITIAL_SHIELD;
+        this.shieldPoints=INITIAL_SHIELD;
         this.hitChance=HIT_CHANCE;
         this.skillLevel=1;
         this.description = "Aumenta escudo por " + this.shieldPoints + " de vida";
@@ -39,9 +39,9 @@ public class Shield extends Skill {
             int currentShield = this.getShieldPoints();
             int targetShield  = targetCharacter.getShield();
 
-            targetShield = targetShield + currentShield
+            targetShield = targetShield + currentShield;
 
-            targetCharacter.setShied(currentShield);
+            targetCharacter.setShield(targetShield);
             return true;
         }else{
             return false;

@@ -17,7 +17,7 @@ public class MultipleAttack extends Skill {
     private final double HIT_CHANCE_LEVEL_UP = 0.05;
     private final int INITIAL_MAX_ATACKS = 3;
 
-    public AtaqueMultiplo(){
+    public MultipleAttack(){
         this.name="Ataque Múltiplo";
         this.spritePath="#implementar";
         this.cost=INITIAL_COST;
