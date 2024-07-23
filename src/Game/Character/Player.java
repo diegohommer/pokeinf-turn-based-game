@@ -10,22 +10,21 @@ import Game.Character.Skill.Skills.ErrorSkill;
 public class Player extends Character{
     private ArrayList<Skill> unlockedSkillsList;
 
-    private final int LP_INITIAL = 100;
-    private final int SP_INITIAL = 50;
-    private final int SH_INITIAL = 50;
-    private final int MAX_SKILL_INDEX = 3;
-    private final String SPRITE_PATH = "#toDo";
+    private static final int LP_INITIAL = 100;
+    private static final int SP_INITIAL = 50;
+    private static final int SH_INITIAL = 50;
+    private static final int MAX_SKILL_INDEX = 3;
+    private static final String SPRITE_PATH = "#toDo";
 
     public Player(String name){
-        this.name = name;
-        this.life = LP_INITIAL;
-        this.maxLife = LP_INITIAL;
-        this.skillPoints = SP_INITIAL;
-        this.maxSkillPoints = SP_INITIAL;
-        this.shield = SH_INITIAL;
-        this.maxShield = SH_INITIAL;
-        this.spritePath = SPRITE_PATH;
-        this.activeSkills = new ArrayList<>(Arrays.asList(new ErrorSkill(), new ErrorSkill(), new ErrorSkill(), new ErrorSkill()));
+        super(
+            SPRITE_PATH, 
+            name, 
+            LP_INITIAL, 
+            SH_INITIAL, 
+            SP_INITIAL, 
+            new ArrayList<>(Arrays.asList(new ErrorSkill(), new ErrorSkill(), new ErrorSkill(), new ErrorSkill())));
+            
         this.unlockedSkillsList = new ArrayList<>();
     }
     
@@ -35,17 +34,6 @@ public class Player extends Character{
 
     public void setUnlockedSkillsList(ArrayList<Skill> unlockedSkillsList) {
         this.unlockedSkillsList = unlockedSkillsList;
-    }
-
-    @Override
-    //seleciona a skill de >0 - 3< no array de skills do personagem
-    public Skill selectSkill(int selectedSkill){
-        ArrayList<Skill> useSkills = this.getActiveSkills();
-        if(selectedSkill > MAX_SKILL_INDEX || selectedSkill < 0){
-            return new ErrorSkill();
-        }else{
-            return useSkills.get(selectedSkill);
-        }
     }
 
     //adiciona uma skill no array de skills desbloqueadas

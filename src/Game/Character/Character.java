@@ -1,8 +1,10 @@
 package Game.Character;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import Game.Character.Skill.Skill;
+import Game.Character.Skill.Skills.ErrorSkill;
 
 public abstract class Character {
     protected String spritePath;
@@ -15,6 +17,19 @@ public abstract class Character {
     protected int maxSkillPoints;
     protected ArrayList<Skill> activeSkills;
     
+    Character(String spritePath, String name, int life, 
+    int maxShield, int skillPoints, ArrayList<Skill> activeSkills)
+    {
+        this.spritePath = spritePath;
+        this.name = name;
+        this.life = life;
+        this.maxLife = life;
+        this.shield = 0;
+        this.maxShield = maxShield;
+        this.skillPoints = skillPoints;
+        this.maxSkillPoints = skillPoints;
+        this.activeSkills = activeSkills;
+    }
 
     public int getLife() {
         return life;
@@ -59,6 +74,13 @@ public abstract class Character {
     public void setMaxSkillPoints(int maxSkillPoints) {
         this.maxSkillPoints = maxSkillPoints;
     }
-    public abstract Skill selectSkill(int selectedSkill);
+    public Skill selectSkill(int selectedSkill){
+        if(0 > selectedSkill || selectedSkill >= activeSkills.size()){
+            return new ErrorSkill();
+        }else{
+            return activeSkills.get(selectedSkill);
+        }
+    }
+
 
 }
