@@ -19,7 +19,7 @@ public class AtaqueMultiplo extends Skill {
 
     public AtaqueMultiplo(){
         this.name="Ataque Múltiplo";
-        this.spritePath="#implementar";
+        this.spritePath="assets//multiAttackSkill.png";
         this.cost=INITIAL_COST;
         this.damagePerHit=INITIAL_DAMAGE;
         this.hitChance=INITIAL_HIT_CHANCE;
@@ -57,7 +57,7 @@ public class AtaqueMultiplo extends Skill {
 
     //metodos de habilidade
     @Override
-    protected boolean applyEffect(Character targetPersonagem) {
+    protected boolean applyEffect(Character casterCharacter, Character targetCharacter) {
         int hitTimes = findNumAtacks();
 
         if(hitTimes == 0){
@@ -65,18 +65,20 @@ public class AtaqueMultiplo extends Skill {
         }else{
             for (int i = 0; i < hitTimes; i++) {
                 int danoAtual = this.getDamagePerHit();
-                int escudoAlvo = targetPersonagem.getShield();
-                int vidaAlvo  = targetPersonagem.getLife();
+                int escudoAlvo = targetCharacter.getShield();
+                int vidaAlvo  = targetCharacter.getLife();
     
-                escudoAlvo = escudoAlvo - danoAtual;
+                escudoAlvo = escudoAlvo - 1;
                 if(escudoAlvo < 0){
-                    danoAtual = danoAtual + escudoAlvo;
                     vidaAlvo = vidaAlvo - danoAtual;
                     escudoAlvo = 0;
+                    if(vidaAlvo < 0){
+                        vidaAlvo = 0;
+                    }
                 }
     
-                targetPersonagem.setShield(escudoAlvo);
-                targetPersonagem.setLife(vidaAlvo);
+                targetCharacter.setShield(escudoAlvo);
+                targetCharacter.setLife(vidaAlvo);
             }
             return true;
         }

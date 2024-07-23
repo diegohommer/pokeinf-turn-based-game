@@ -17,7 +17,7 @@ public class AtaqueRapido extends Skill {
 
     public AtaqueRapido(){
         this.name="Ataque Rápido";
-        this.spritePath="#implementar";
+        this.spritePath="assets//attackSkill.png";
         this.cost=INITIAL_COST;
         this.damage=INITIAL_DAMAGE;
         this.hitChance=HIT_CHANCE;
@@ -51,21 +51,23 @@ public class AtaqueRapido extends Skill {
     }
 
     @Override
-    public boolean applyEffect(Character target){
+    public boolean applyEffect(Character casterCharacter, Character targetCharacter){
         if(this.didItHit()){
             int danoAtual = this.getDamage();
-            int escudoAlvo = target.getShield();
-            int vidaAlvo  = target.getLife();
+            int escudoAlvo = targetCharacter.getShield();
+            int vidaAlvo  = targetCharacter.getLife();
 
-            escudoAlvo = escudoAlvo - danoAtual;
+            escudoAlvo = escudoAlvo - 1;
             if(escudoAlvo < 0){
-                danoAtual = danoAtual + escudoAlvo;
                 vidaAlvo = vidaAlvo - danoAtual;
                 escudoAlvo = 0;
+                if(vidaAlvo < 0){
+                    vidaAlvo = 0;
+                }
             }
 
-            target.setShield(escudoAlvo);
-            target.setLife(vidaAlvo);
+            targetCharacter.setShield(escudoAlvo);
+            targetCharacter.setLife(vidaAlvo);
             return true;
         }else{
             return false;

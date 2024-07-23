@@ -17,7 +17,7 @@ public class Cura extends Skill {
 
     public Cura(){
         this.name="Cura";
-        this.spritePath="#implementar";
+        this.spritePath="assets//cureSkill.png";
         this.cost=INITIAL_COST;
         this.healPoints=INITIAL_CURE;
         this.hitChance=HIT_CHANCE;
@@ -34,18 +34,18 @@ public class Cura extends Skill {
     }
 
     @Override
-    protected boolean applyEffect(Character targetPersonagem) {
+    protected boolean applyEffect(Character casterCharacter, Character targetCharacter) {
         if(this.didItHit()){
             int curaAtual = this.getHealPoints();
-            int vidaAlvo  = targetPersonagem.getLife();
-            int vidaMax = targetPersonagem.getMaxLife();
+            int vidaAlvo  = casterCharacter.getLife();
+            int vidaMax = casterCharacter.getMaxLife();
 
             vidaAlvo = vidaAlvo + curaAtual;
             if(vidaAlvo > vidaMax){
                 vidaAlvo = vidaMax;
             }
 
-            targetPersonagem.setLife(vidaAlvo);
+            casterCharacter.setLife(vidaAlvo);
             return true;
         }else{
             return false;

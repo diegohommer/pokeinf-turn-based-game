@@ -10,9 +10,11 @@ public class ErrorSkill extends Skill{
         this.hitChance = 0;
         this.skillLevel = 0;
         this.description = "Não existe";
+        this.spritePath = "assets//errorSkill.png";
+
     }
     @Override
-    protected boolean applyEffect(Character targetPersonagem) {
+    protected boolean applyEffect(Character casterCharacter, Character targetCharacter) {
        return false;
     }
 
