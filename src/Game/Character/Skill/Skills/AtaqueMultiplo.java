@@ -3,7 +3,7 @@ package Game.Character.Skill.Skills;
 import Game.Character.Character;
 import Game.Character.Skill.Skill;
 
-public class MultipleAttack extends Skill {
+public class AtaqueMultiplo extends Skill {
     //efeitos de classe requeridos
     private int damagePerHit;
     private int maxAtacks;
@@ -57,26 +57,26 @@ public class MultipleAttack extends Skill {
 
     //metodos de habilidade
     @Override
-    protected boolean applyEffect(Character targetCharacter) {
+    protected boolean applyEffect(Character targetPersonagem) {
         int hitTimes = findNumAtacks();
 
         if(hitTimes == 0){
             return false;
         }else{
             for (int i = 0; i < hitTimes; i++) {
-                int currentDamage = this.getDamagePerHit();
-                int targetShield = targetCharacter.getShield();
-                int targetLife  = targetCharacter.getLife();
+                int danoAtual = this.getDamagePerHit();
+                int escudoAlvo = targetPersonagem.getShield();
+                int vidaAlvo  = targetPersonagem.getLife();
     
-                targetShield = targetShield - currentDamage;
-                if(targetShield < 0){
-                    currentDamage = currentDamage + targetShield;
-                    targetLife = targetLife - currentDamage;
-                    targetShield = 0;
+                escudoAlvo = escudoAlvo - danoAtual;
+                if(escudoAlvo < 0){
+                    danoAtual = danoAtual + escudoAlvo;
+                    vidaAlvo = vidaAlvo - danoAtual;
+                    escudoAlvo = 0;
                 }
     
-                targetCharacter.setShield(targetShield);
-                targetCharacter.setLife(targetLife);
+                targetPersonagem.setShield(escudoAlvo);
+                targetPersonagem.setLife(vidaAlvo);
             }
             return true;
         }
