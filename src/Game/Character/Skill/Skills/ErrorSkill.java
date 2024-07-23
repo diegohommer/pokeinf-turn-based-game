@@ -12,7 +12,7 @@ public class ErrorSkill extends Skill{
         this.description = "Não existe";
     }
     @Override
-    protected boolean applyEffect(Character targetPersonagem) {
+    protected boolean applyEffect(Character targetCharacter) {
        return false;
     }
 
