@@ -3,7 +3,7 @@ package Game.Character.Skill.Skills;
 import Game.Character.Character;
 import Game.Character.Skill.Skill;
 
-public class QuickAttack extends Skill {
+public class AtaqueRapido extends Skill {
     //efeito da classe ataquerapido
     private int damage;
 
@@ -15,7 +15,7 @@ public class QuickAttack extends Skill {
     private final double HIT_CHANCE = 0.7;
 
 
-    public QuickAttack(){
+    public AtaqueRapido(){
         this.name="Ataque Rápido";
         this.spritePath="#implementar";
         this.cost=INITIAL_COST;
@@ -53,19 +53,19 @@ public class QuickAttack extends Skill {
     @Override
     public boolean applyEffect(Character target){
         if(this.didItHit()){
-            int currentDamage = this.getDamage();
-            int targetShield = target.getShield();
-            int targetLife  = target.getLife();
+            int danoAtual = this.getDamage();
+            int escudoAlvo = target.getShield();
+            int vidaAlvo  = target.getLife();
 
-            targetShield = targetShield - currentDamage;
-            if(targetShield < 0){
-                currentDamage = currentDamage + targetShield;
-                targetLife = targetLife - currentDamage;
-                targetShield = 0;
+            escudoAlvo = escudoAlvo - danoAtual;
+            if(escudoAlvo < 0){
+                danoAtual = danoAtual + escudoAlvo;
+                vidaAlvo = vidaAlvo - danoAtual;
+                escudoAlvo = 0;
             }
 
-            target.setShield(targetShield);
-            target.setLife(targetLife);
+            target.setShield(escudoAlvo);
+            target.setLife(vidaAlvo);
             return true;
         }else{
             return false;
