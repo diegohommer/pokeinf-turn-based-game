@@ -7,8 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public abstract class Scene extends JPanel{
-    protected static final int WINDOW_HEIGHT = 768;
     protected static final int WINDOW_WIDTH = 1024;
+    protected static final int WINDOW_HEIGHT = 768;
     private Image backgroundSprite;
 
 

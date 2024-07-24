@@ -3,17 +3,24 @@ package Game;
 import javax.swing.*;
 
 import Game.Character.*;
+import Game.Character.Skill.Skill;
+import Game.Character.Skill.Skills.*;
 import Game.Scene.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Game extends JFrame {
     public final String WINDOW_TITLE = "PokeINF";
-    public final int WINDOW_HEIGHT = 768;
     public final int WINDOW_WIDTH = 1024;
+    public final int WINDOW_HEIGHT = 768;
     private final String PLAYER_NAME = "Dennis";
 
     private final String MENU_BACKGROUND = "assets//test_background.jpg";
     private Player player;
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+
+    private int currentEnemyIndex = 0;
 
     public enum STATE {
         MENU,
@@ -32,7 +39,8 @@ public class Game extends JFrame {
         setResizable(false);
         setLayout(new BorderLayout());
         setPlayer(new Player(PLAYER_NAME));
-        setGameState(STATE.MENU);
+        initEnemies();
+        setGameState(STATE.BATTLE);
     }
 
     public Player getPlayer(){
@@ -45,6 +53,16 @@ public class Game extends JFrame {
         } catch (Exception e){
             return false;
         }
+    }
+
+    private void initEnemies()
+    {
+        enemies.add(new Enemy(
+            "assets//attackSkill.png", 
+            "Enemy0", 
+            100, 
+            60, 
+            new ArrayList<>(Arrays.asList(new ErrorSkill()))));
     }
 
     public STATE getGameState(){
@@ -72,13 +90,13 @@ public class Game extends JFrame {
                 // Add CONFIGS panel
                 break;
             case BATTLE:
-                // Add BATTLE panel
+                this.getContentPane().add(new Battle(this, "", player, enemies.get(currentEnemyIndex)));
                 break;
             case CHOOSE_SKILL:
                 this.getContentPane().add(new ChooseSkill(this, getPlayer(), MENU_BACKGROUND));
                 break;
             case CHOOSE_BATTLE:
-                // Add CHOOSE_BATTLE panel
+                // Add CHOOSE BATTLE panel
                 break;
         }
         this.getContentPane().revalidate();

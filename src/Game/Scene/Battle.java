@@ -1,74 +1,103 @@
 package Game.Scene;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Game.Game;
+import Game.Character.Enemy;
 import Game.Character.Player;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Battle extends Scene{
-    private final int BUTTON_TOTAL = 4;
     private final int BUTTON_WIDTH = 200;
     private final int BUTTON_HEIGHT = 50;
     private final int BUTTON_X_POS = (WINDOW_WIDTH - BUTTON_WIDTH) / 2;
     private final int BUTTON_Y_POS = (WINDOW_HEIGHT - BUTTON_HEIGHT) / 2;
-    private final int BUTTON_Y_OFFSET = 70;
+    private final int BUTTON_X_OFFSET = 210;
+    JLabel battleText;
+    ArrayList<JButton> skillButtons = new ArrayList<JButton>();
 
     private Game game;
-    private final String[] buttonLabels = {"New Game", "Load Game", "Settings", "Exit"};
+    private Player player;
+    private Enemy enemy;
 
-    public Battle(Game game, String spritePath){
+    public Battle(Game game, String spritePath, Player player, Enemy enemy){
         super(spritePath);
         this.game = game;
-        addButtons();
+        this.player = player;
+        this.enemy = enemy;
+
+        createUI();
+        //battleText.setText("Escolha seu próximo movimento");
     }
-    
-    private void addButtons() {
-        JButton newButton;
 
-        // Initialize buttons
-        for(int i = 0; i < BUTTON_TOTAL; i++){
-            final String buttonLabel = buttonLabels[i];
-            newButton = new JButton(buttonLabel); 
+    private void createUI()
+    {
+        setLayout(null);
 
-            // Position and dimension the button
-            int yPosition = BUTTON_Y_POS + (i * BUTTON_Y_OFFSET);
-            newButton.setBounds(BUTTON_X_POS, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
+        battleText = new JLabel("A batalha começa!");
+        battleText.setBounds(50, 550, WINDOW_WIDTH, 100);
+        battleText.setForeground(Color.BLACK); // Set text color
+        battleText.setFont(new Font("Courier New", Font.BOLD, 24));
+        battleText.setHorizontalAlignment(JLabel.LEFT);
+        battleText.setVerticalAlignment(JLabel.TOP);
+        add(battleText);
+
+        for(int i = 0; i < 4; i++)
+        {
+            JButton skillButton = new JButton("Skill " + Integer.toString(i));
+            skillButtons.add(skillButton);
+            skillButton.setBounds(50 + BUTTON_X_OFFSET * i, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
 
             // Determine what the button does when it's clicked
-            newButton.addActionListener(new ActionListener() {
+            skillButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    handleButtonClick(buttonLabel);
+                    return;
                 }
             });
 
-            add(newButton);
-        
+            add(skillButton);
         }
-        // Use absolute positioning
-        setLayout(null); 
-    }
 
-    private void handleButtonClick(String buttonLabel) {
-        switch (buttonLabel) {
-            case "New Game":
-                game.setGameState(Game.STATE.BATTLE);
-                break;
-            case "Load Game":
-                System.out.println("Load Game clicked");
-                break;
-            case "Settings":
-                game.setGameState(Game.STATE.SETTINGS);
-                break;
-            case "Exit":
-                System.exit(0);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown button label: " + buttonLabel);
+        int charactersSpriteWidth = 180;
+        int charactersSpriteHeight = 250;
+
+        try {
+            String path = System.getProperty("user.dir");
+            path = path.substring(0, path.length() - 3) + player.getSpritePath();
+            BufferedImage originalImage = ImageIO.read(new File(path));
+            Image scaledImage = originalImage.getScaledInstance(charactersSpriteWidth, charactersSpriteHeight, Image.SCALE_SMOOTH);
+
+            ImageIcon playerImage = new ImageIcon(scaledImage);
+            JLabel playerSprite = new JLabel(playerImage);
+            playerSprite.setBounds(100, 280, charactersSpriteWidth, charactersSpriteHeight);
+
+            add(playerSprite);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String path = System.getProperty("user.dir");
+            path = path.substring(0, path.length() - 3) + enemy.getSpritePath();
+            BufferedImage originalImage = ImageIO.read(new File(path));
+            Image scaledImage = originalImage.getScaledInstance(charactersSpriteWidth, charactersSpriteHeight, Image.SCALE_SMOOTH);
+
+            ImageIcon playerImage = new ImageIcon(scaledImage);
+            JLabel playerSprite = new JLabel(playerImage);
+            playerSprite.setBounds(700, 30, charactersSpriteWidth, charactersSpriteHeight);
+
+            add(playerSprite);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

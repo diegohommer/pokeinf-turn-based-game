@@ -14,7 +14,7 @@ public class Player extends Character{
     private static final int SP_INITIAL = 50;
     private static final int SH_INITIAL = 50;
     private static final int MAX_SKILL_INDEX = 3;
-    private static final String SPRITE_PATH = "#toDo";
+    private static final String SPRITE_PATH = "assets//attackSkill.png";
 
     public Player(String name){
         super(

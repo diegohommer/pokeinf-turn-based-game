@@ -31,7 +31,7 @@ public class MainMenu extends Scene {
     private void addTitle() {
         JLabel titleLabel = new JLabel(MAIN_MENU_TITLE);
         titleLabel.setBounds(0, 0, WINDOW_WIDTH, TITLE_HEIGHT);
-        titleLabel.setForeground(Color.WHITE); // Set text color
+        titleLabel.setForeground(Color.BLACK); // Set text color
         titleLabel.setFont(new Font("Courier New", Font.BOLD, 100));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setVerticalAlignment(JLabel.CENTER);

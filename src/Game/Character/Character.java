@@ -31,6 +31,14 @@ public abstract class Character {
         this.activeSkills = activeSkills;
     }
 
+    public String getName()
+    {
+        return name;
+    }
+    public String getSpritePath()
+    {
+        return spritePath;
+    }
     public int getLife() {
         return life;
     }
