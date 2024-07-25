@@ -57,7 +57,7 @@ public class AtaqueMultiplo extends Skill {
 
     //metodos de habilidade
     @Override
-    protected boolean applyEffect(Character casterCharacter, Character targetCharacter) {
+    public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
         int hitTimes = findNumAtacks();
 
         if(hitTimes == 0){
@@ -86,7 +86,7 @@ public class AtaqueMultiplo extends Skill {
     }
 
     @Override
-    protected boolean upgradeEffect() {
+    public boolean upgradeEffect() {
         if(this.isMaxLevel()){
             return false;
         }else {

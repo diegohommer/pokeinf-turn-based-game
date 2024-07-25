@@ -14,12 +14,12 @@ public class ErrorSkill extends Skill{
 
     }
     @Override
-    protected boolean applyEffect(Character casterCharacter, Character targetCharacter) {
+    public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
        return false;
     }
 
     @Override
-    protected boolean upgradeEffect(){
+    public boolean upgradeEffect(){
         return false;
     }
     

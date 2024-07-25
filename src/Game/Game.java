@@ -3,7 +3,6 @@ package Game;
 import javax.swing.*;
 
 import Game.Character.*;
-import Game.Character.Skill.Skill;
 import Game.Character.Skill.Skills.*;
 import Game.Scene.*;
 import java.awt.*;

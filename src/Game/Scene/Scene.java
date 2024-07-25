@@ -15,8 +15,6 @@ public abstract class Scene extends JPanel{
     protected static final int BUTTON_Y_OFFSET = 70;
     private Image backgroundSprite;
 
-
-    // Construtor de Cena que recebe o path para o arquivo de imagem da sprite de background e altura/largura da janela
     public Scene(String spritePath) {
         try {
             backgroundSprite = ImageIO.read(new File(spritePath));
@@ -26,7 +24,7 @@ public abstract class Scene extends JPanel{
         setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
     }
 
-    // Função que é chamada automaticamente cada vez que a cena precisa ser redesenhada
+    // This function is called everytime the scene needs to be redrawn
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

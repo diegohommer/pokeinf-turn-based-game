@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 public class MainMenu extends Scene {
     private static final String MAIN_MENU_TITLE = "PokeINF";
+    private static final int TITLE_FONT_SIZE = 100;
     private static final int TITLE_HEIGHT = 250;
     private static final MenuAction[] BUTTON_ACTIONS = MenuAction.values();
 
@@ -31,8 +32,8 @@ public class MainMenu extends Scene {
     private void addTitle() {
         JLabel titleLabel = new JLabel(MAIN_MENU_TITLE);
         titleLabel.setBounds(0, 0, WINDOW_WIDTH, TITLE_HEIGHT);
-        titleLabel.setForeground(Color.BLACK); // Set text color
-        titleLabel.setFont(new Font("Courier New", Font.BOLD, 100));
+        titleLabel.setForeground(Color.WHITE); // Set text color
+        titleLabel.setFont(new Font("Courier New", Font.BOLD, TITLE_FONT_SIZE));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setVerticalAlignment(JLabel.CENTER);
         add(titleLabel);
