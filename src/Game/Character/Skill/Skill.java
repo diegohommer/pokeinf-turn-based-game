@@ -20,8 +20,8 @@ public abstract class Skill {
     public static ArrayList<Skill> createdSkills = new ArrayList<>();
 
     // Métodos que devem ser criados em todas as habilidades separadamente
-    protected abstract boolean applyEffect(Character casterCharacter, Character targetCharacter);
-    protected abstract boolean upgradeEffect();
+    public abstract boolean applyEffect(Character casterCharacter, Character targetCharacter);
+    public abstract boolean upgradeEffect();
 
     // Getters e setters importantes
     public String getName() {

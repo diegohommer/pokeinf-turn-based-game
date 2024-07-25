@@ -34,7 +34,7 @@ public class Cura extends Skill {
     }
 
     @Override
-    protected boolean applyEffect(Character casterCharacter, Character targetCharacter) {
+    public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
         if(this.didItHit()){
             int curaAtual = this.getHealPoints();
             int vidaAlvo  = casterCharacter.getLife();
@@ -53,7 +53,7 @@ public class Cura extends Skill {
     }
 
     @Override
-    protected boolean upgradeEffect() {
+    public boolean upgradeEffect() {
         if(this.isMaxLevel()){
             return false;
         }else {

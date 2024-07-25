@@ -3,7 +3,6 @@ package Game;
 import javax.swing.*;
 
 import Game.Character.*;
-import Game.Character.Skill.Skill;
 import Game.Character.Skill.Skills.*;
 import Game.Scene.*;
 import java.awt.*;
@@ -12,8 +11,8 @@ import java.util.Arrays;
 
 public class Game extends JFrame {
     public final String WINDOW_TITLE = "PokeINF";
-    public final int WINDOW_WIDTH = 1024;
-    public final int WINDOW_HEIGHT = 768;
+    public final int WINDOW_WIDTH = Scene.WINDOW_WIDTH;
+    public final int WINDOW_HEIGHT = Scene.WINDOW_HEIGHT;
     private final String PLAYER_NAME = "Dennis";
 
     private final String MENU_BACKGROUND = "assets//test_background.jpg";
@@ -40,7 +39,7 @@ public class Game extends JFrame {
         setLayout(new BorderLayout());
         setPlayer(new Player(PLAYER_NAME));
         initEnemies();
-        setGameState(STATE.BATTLE);
+        setGameState(STATE.MENU);
     }
 
     public Player getPlayer(){
@@ -90,7 +89,7 @@ public class Game extends JFrame {
                 // Add CONFIGS panel
                 break;
             case BATTLE:
-                this.getContentPane().add(new Battle(this, "", player, enemies.get(currentEnemyIndex)));
+                this.getContentPane().add(new Battle(this, MENU_BACKGROUND, player, enemies.get(currentEnemyIndex)));
                 break;
             case CHOOSE_SKILL:
                 this.getContentPane().add(new ChooseSkill(this, getPlayer(), MENU_BACKGROUND));
