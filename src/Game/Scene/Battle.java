@@ -16,11 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Battle extends Scene{
-    private final int BUTTON_WIDTH = 200;
-    private final int BUTTON_HEIGHT = 50;
-    private final int BUTTON_X_POS = (WINDOW_WIDTH - BUTTON_WIDTH) / 2;
-    private final int BUTTON_Y_POS = (WINDOW_HEIGHT - BUTTON_HEIGHT) / 2;
-    private final int BUTTON_X_OFFSET = 210;
+    private String[] buttonLabels;
+
     JLabel battleText;
     ArrayList<JButton> skillButtons = new ArrayList<JButton>();
 
@@ -41,31 +38,7 @@ public class Battle extends Scene{
     private void createUI()
     {
         setLayout(null);
-
-        battleText = new JLabel("A batalha começa!");
-        battleText.setBounds(50, 550, WINDOW_WIDTH, 100);
-        battleText.setForeground(Color.BLACK); // Set text color
-        battleText.setFont(new Font("Courier New", Font.BOLD, 24));
-        battleText.setHorizontalAlignment(JLabel.LEFT);
-        battleText.setVerticalAlignment(JLabel.TOP);
-        add(battleText);
-
-        for(int i = 0; i < 4; i++)
-        {
-            JButton skillButton = new JButton("Skill " + Integer.toString(i));
-            skillButtons.add(skillButton);
-            skillButton.setBounds(50 + BUTTON_X_OFFSET * i, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
-
-            // Determine what the button does when it's clicked
-            skillButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    return;
-                }
-            });
-
-            add(skillButton);
-        }
+        addBattleText();
 
         int charactersSpriteWidth = 180;
         int charactersSpriteHeight = 250;
@@ -98,6 +71,58 @@ public class Battle extends Scene{
             add(playerSprite);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void addBattleText() {
+        battleText = new JLabel("A batalha começa!");
+        battleText.setBounds(50, 550, WINDOW_WIDTH, 100);
+        battleText.setForeground(Color.BLACK); // Set text color
+        battleText.setFont(new Font("Courier New", Font.BOLD, 24));
+        battleText.setHorizontalAlignment(JLabel.LEFT);
+        battleText.setVerticalAlignment(JLabel.TOP);
+        add(battleText);
+    }
+
+    private void addButtons() {
+        for(int i = 0; i < 4; i++)
+        {
+            JButton skillButton = new JButton("Skill " + Integer.toString(i));
+            skillButtons.add(skillButton);
+            skillButton.setBounds(50 + BUTTON_X_OFFSET * i, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
+
+            // Determine what the button does when it's clicked
+            skillButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    return;
+                }
+            });
+        }
+        // Use absolute positioning
+        setLayout(null); 
+    }
+
+    private void addButton() {
+
+    }
+
+    private void handleButtonClick(String buttonLabel) {
+        switch (buttonLabel) {
+            case "New Game":
+                game.setGameState(Game.STATE.CHOOSE_SKILL);
+                break;
+            case "Load Game":
+                System.out.println("Load Game clicked");
+                break;
+            case "Settings":
+                game.setGameState(Game.STATE.SETTINGS);
+                break;
+            case "Exit":
+                System.exit(0);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown button label: " + buttonLabel);
         }
     }
 }

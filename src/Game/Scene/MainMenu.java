@@ -1,25 +1,25 @@
 package Game.Scene;
 
-import javax.swing.*;
-
 import Game.Game;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu extends Scene {
-    private final String MAIN_MENU_TITLE = "PokeINF";
-    private final int TITLE_HEIGHT = 250;
-    private final int BUTTON_TOTAL = 4;
-    private final int BUTTON_WIDTH = 200;
-    private final int BUTTON_HEIGHT = 50;
-    private final int BUTTON_X_POS = (WINDOW_WIDTH - BUTTON_WIDTH) / 2;
-    private final int BUTTON_Y_POS = (WINDOW_HEIGHT - BUTTON_HEIGHT) / 2;
-    private final int BUTTON_Y_OFFSET = 70;
+    private static final String MAIN_MENU_TITLE = "PokeINF";
+    private static final int TITLE_HEIGHT = 250;
+    private static final MenuAction[] BUTTON_ACTIONS = MenuAction.values();
 
-    private Game game;
-    private final String[] buttonLabels = {"New Game", "Load Game", "Settings", "Exit"};
+    private enum MenuAction {
+        NEW_GAME,
+        LOAD_GAME,
+        SETTINGS,
+        EXIT
+    }
+
+    private final Game game;
 
     public MainMenu(Game game, String spritePath){
         super(spritePath);
@@ -40,48 +40,47 @@ public class MainMenu extends Scene {
 
     
     private void addButtons() {
-        JButton newButton;
-
-        // Initialize buttons
-        for(int i = 0; i < BUTTON_TOTAL; i++){
-            final String buttonLabel = buttonLabels[i];
-            newButton = new JButton(buttonLabel); 
-
-            // Position and dimension the button
-            int yPosition = BUTTON_Y_POS + (i * BUTTON_Y_OFFSET);
-            newButton.setBounds(BUTTON_X_POS, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
-
-            // Determine what the button does when it's clicked
-            newButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    handleButtonClick(buttonLabel);
-                }
-            });
-
-            add(newButton);
-        
+        for (int i = 0; i < BUTTON_ACTIONS.length; i++) {
+            addButton(BUTTON_ACTIONS[i], i);
         }
-        // Use absolute positioning
-        setLayout(null); 
+
+        setLayout(null); // Use absolute positioning
     }
 
-    private void handleButtonClick(String buttonLabel) {
-        switch (buttonLabel) {
-            case "New Game":
+    private void addButton(MenuAction action, int offset) {
+        final String buttonLabel = action.toString().replace("_", " ");
+        JButton newButton = new JButton(buttonLabel); 
+
+        int xPos = (Scene.WINDOW_WIDTH - Scene.BUTTON_WIDTH) / 2;
+        int yPos = ((Scene.WINDOW_HEIGHT- Scene.BUTTON_HEIGHT) / 2) + (offset * Scene.BUTTON_Y_OFFSET);
+        newButton.setBounds(xPos, yPos, Scene.BUTTON_WIDTH, Scene.BUTTON_HEIGHT);
+
+        newButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleButtonClick(action); // Determine what the button does when it's clicked
+            }
+        });
+
+        add(newButton);
+    }
+
+    private void handleButtonClick(MenuAction action) {       
+        switch (action) {
+            case NEW_GAME:
                 game.setGameState(Game.STATE.CHOOSE_SKILL);
                 break;
-            case "Load Game":
+            case LOAD_GAME:
                 System.out.println("Load Game clicked");
                 break;
-            case "Settings":
+            case SETTINGS:
                 game.setGameState(Game.STATE.SETTINGS);
                 break;
-            case "Exit":
+            case EXIT:
                 System.exit(0);
                 break;
             default:
-                throw new IllegalArgumentException("Unknown button label: " + buttonLabel);
+                throw new IllegalArgumentException("Unknown button label: " + action.toString());
         }
     }
 

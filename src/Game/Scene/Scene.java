@@ -7,8 +7,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public abstract class Scene extends JPanel{
-    protected static final int WINDOW_WIDTH = 1024;
-    protected static final int WINDOW_HEIGHT = 768;
+    public static final int WINDOW_WIDTH = 1024;
+    public static final int WINDOW_HEIGHT = 768;
+    protected static final int BUTTON_WIDTH = 200;
+    protected static final int BUTTON_HEIGHT = 50;
+    protected static final int BUTTON_X_OFFSET = 210;
+    protected static final int BUTTON_Y_OFFSET = 70;
     private Image backgroundSprite;
 
 
@@ -19,6 +23,7 @@ public abstract class Scene extends JPanel{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
     }
 
     // Função que é chamada automaticamente cada vez que a cena precisa ser redesenhada
