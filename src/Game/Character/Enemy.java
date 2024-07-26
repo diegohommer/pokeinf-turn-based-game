@@ -11,8 +11,7 @@ public class Enemy extends Character
     private static final int MAX_SHIELD = 3;
     private static final int NUM_SKILLS = 4;
 
-    public Enemy(String spritePath, String name, int life, 
-    int maxSkillPoints, ArrayList<Skill> activeSkills)
+    public Enemy(String spritePath, String name, int life, int maxSkillPoints, ArrayList<Skill> activeSkills)
     {
         super(
             spritePath, 
