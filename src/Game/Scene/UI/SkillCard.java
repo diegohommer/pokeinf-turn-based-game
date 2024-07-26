@@ -77,7 +77,7 @@ public class SkillCard extends JPanel{
         actionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.addSkill(skill);
+                skill.upgradeEffect();
                 game.setGameState(Game.STATE.BATTLE);
             }
         });

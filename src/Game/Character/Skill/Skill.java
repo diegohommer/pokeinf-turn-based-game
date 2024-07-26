@@ -5,15 +5,13 @@ import java.util.ArrayList;
 import Game.Character.Character;
 
 public abstract class Skill {
-
     protected String spritePath;
     protected String name;
+    protected String description;
     protected int cost;
     protected int skillLevel;
     protected double hitChance;
-    protected String description;
 
-    //constante de controle
     private final int MAX_LEVEL = 5;
 
     //variavel de classe
@@ -23,41 +21,64 @@ public abstract class Skill {
     public abstract boolean applyEffect(Character casterCharacter, Character targetCharacter);
     public abstract boolean upgradeEffect();
 
-    // Getters e setters importantes
+    public String getSpritePath(){
+        return this.spritePath;
+    }
+    public boolean setSpritePath(String spritePath){
+        if (spritePath != null && !spritePath.isEmpty()) {
+            this.spritePath = spritePath;
+            return true;
+        }
+        return false;
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
-    public int getSkillLevel(){
-        return this.skillLevel;
+    public boolean setName(String name) {
+        if (name != null && !name.isEmpty()) {
+            this.name = name;
+            return true;
+        }
+        return false;
     }
-    public void setSkillLevel(int level){
-        this.skillLevel = level;
-    }
-    public int getCost(){
-        return this.cost;
-    }
-    public void setCost(int newCost){
-        this.cost = newCost;
-    }
+
     public String getDescription(){
         return this.description;
     }
     public boolean setDescription(String description){
-        try{
+        if (description != null && !description.isEmpty()) {
             this.description = description;
             return true;
-        } catch(Exception e){
-            return false;
         }
+        return false;
     }
+
+    public int getSkillLevel(){
+        return this.skillLevel;
+    }
+    public void setSkillLevel(int level){
+        int clampedSkillLevel = Math.max(1, Math.min(MAX_LEVEL, level));
+        this.skillLevel = clampedSkillLevel;
+    }
+
+    public int getCost(){
+        return this.cost;
+    }
+    public void setCost(int newCost){
+        int clampedCost = Math.max(0, newCost);
+        this.cost = clampedCost;
+    }
+
     public double getHitChance() {
         return hitChance;
     }
     public void setHitChance(double hitChance) {
-        this.hitChance = hitChance;
+        double clampedHitChance = Math.max(0.0, Math.min(1.0, hitChance));
+        this.hitChance = clampedHitChance;
     }
 
-    // Métodos de classe
+
     public static ArrayList<Skill> getCreatedSkills(){
         return createdSkills;
     }
@@ -66,24 +87,13 @@ public abstract class Skill {
     }
 
 
-    // Função de verificação de level maximo
     public boolean isMaxLevel(){
-        if(this.getSkillLevel() == MAX_LEVEL){
-            return true;
-        }else{
-            return false;
-        }
+        return this.getSkillLevel() == MAX_LEVEL;
     }
     
-    // Função que verifica se a habilidade acertou o alvo
     public boolean didItHit(){
-        double randNum = Math.random();
-
-        if(randNum > (1.0 - this.getHitChance())){
-            return true;
-        }else{
-            return false;
-        }
+        double randNum = Math.random(); // Random double between 0.0 and 1.0
+        return randNum <= this.getHitChance();
     }
 
 }
