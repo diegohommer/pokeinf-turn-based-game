@@ -131,4 +131,14 @@ public abstract class Character {
     public boolean isDead(){
         return this.getLife() == 0;
     }
+
+    public String GetInfoText()
+    {
+        return "<html>" + 
+        name + 
+        "<br>Vida: " + Integer.toString(life) +
+        "<br>Pontos de habilidade: " + Integer.toString(skillPoints) +
+        "<br>Escudos: " + Integer.toString(shield) + 
+        "</html>";
+    }
 }
