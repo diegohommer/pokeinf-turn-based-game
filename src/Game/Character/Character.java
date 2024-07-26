@@ -120,14 +120,6 @@ public abstract class Character {
         }
         return false;
     }
-
-    public Skill selectSkill(int selectedSkill) {
-        if (selectedSkill < 0 || selectedSkill >= activeSkills.size()) {
-            return new ErrorSkill();
-        } else {
-            return activeSkills.get(selectedSkill);
-        }
-    }
     public boolean deleteSkill(int selectedSkill) {
         if (selectedSkill >= 0 && selectedSkill < activeSkills.size()) {
             activeSkills.remove(selectedSkill);

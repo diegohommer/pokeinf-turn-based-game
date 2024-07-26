@@ -21,4 +21,8 @@ public class Enemy extends Character
             maxSkillPoints, 
             activeSkills);
     }
+
+    public Skill resolveNextSkill() {
+        return activeSkills.get(0);
+    }
 }

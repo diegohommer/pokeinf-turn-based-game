@@ -63,4 +63,12 @@ public class Player extends Character{
             return true;
         }
     }
+
+    public Skill selectSkill(int selectedSkill) {
+        if (selectedSkill < 0 || selectedSkill >= activeSkills.size()) {
+            return new ErrorSkill();
+        } else {
+            return activeSkills.get(selectedSkill);
+        }
+    }
 }
