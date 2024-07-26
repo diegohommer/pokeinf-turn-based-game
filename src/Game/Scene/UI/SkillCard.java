@@ -11,11 +11,12 @@ import java.awt.event.ActionListener;
 import Game.Character.Skill.Skill;
 
 public class SkillCard extends JPanel{
-    private final int CARD_HEIGHT = 400;
-    private final int CARD_WIDTH = 300;
-    private final int CARD_TITLE_SIZE = 25;
-    private final int CARD_DESC_SIZE = 12;
-    private final int BUTTON_HEIGHT = 40;
+    public static final int CARD_HEIGHT = 300;
+    public static final int CARD_WIDTH = 200;
+    public static final int CARD_TITLE_SIZE = 18;
+    public static final int CARD_DESC_SIZE = 12;
+    public static final int BUTTON_HEIGHT = 40;
+    public static final String BUTTON_TITLE = "Upgrade Skill";
 
     public SkillCard(Skill skill, Player player, Game game) {
         super();
@@ -71,7 +72,7 @@ public class SkillCard extends JPanel{
     }
 
     private JButton createButton(Skill skill, Player player, Game game){
-        JButton actionButton = new JButton("Select Skill");
+        JButton actionButton = new JButton(BUTTON_TITLE);
         actionButton.setPreferredSize(new Dimension(CARD_WIDTH, BUTTON_HEIGHT));
         actionButton.addActionListener(new ActionListener() {
             @Override

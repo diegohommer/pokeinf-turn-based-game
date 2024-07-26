@@ -8,10 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu extends Scene {
-    private static final String MAIN_MENU_TITLE = "PokeINF";
-    private static final int TITLE_FONT_SIZE = 100;
-    private static final int TITLE_HEIGHT = 250;
-    private static final MenuAction[] BUTTON_ACTIONS = MenuAction.values();
+    public static final String MAIN_MENU_TITLE = "PokeINF";
+    public static final int TITLE_FONT_SIZE = 100;
+    public static final int TITLE_HEIGHT = 250;
+    public static final MenuAction[] BUTTON_ACTIONS = MenuAction.values();
 
     private enum MenuAction {
         NEW_GAME,

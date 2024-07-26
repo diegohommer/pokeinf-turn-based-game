@@ -22,11 +22,10 @@ public class ChooseSkill extends Scene {
         this.player = player;
         this.game = game;
 
-        // PLACEHOLDER -> DEVEMOS TER UM MÉTODO PARA SORTEAR NOVAS SKILLS A SEREM ADICIONADAS
         this.skills = new ArrayList<>(); 
-        skills.add(new AtaqueRapido());
-        skills.add(new ErrorSkill());
-        // PLACEHOLDER
+        for(Skill skill : player.getActiveSkills()){
+            skills.add(skill);
+        }
 
         addSkillCards();
     }
