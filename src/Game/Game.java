@@ -57,8 +57,8 @@ public class Game extends JFrame {
     private void initEnemies()
     {
         enemies.add(new Enemy(
-            "assets//attackSkill.png", 
-            "Enemy0", 
+            "assets//pimenta.jpg", 
+            "Pimenta", 
             100, 
             60, 
             new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new ErrorSkill()))));

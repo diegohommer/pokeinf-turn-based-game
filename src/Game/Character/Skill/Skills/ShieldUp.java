@@ -3,37 +3,36 @@ package Game.Character.Skill.Skills;
 import Game.Character.Character;
 import Game.Character.Skill.Skill;
 
-public class Heal extends Skill {
+public class ShieldUp extends Skill{
     // class specific atributes
-    private int healPoints;
+    private int shieldPoints;
 
     // class constants
-    private static final String SPRITE_PATH = "assets//cureSkill.png";
-    private static final String SKILL_NAME = "Heal";
+    private static final String SPRITE_PATH = "assets//shieldUpSkill.png";
+    private static final String SKILL_NAME = "Shield-Up";
     private static final int INITIAL_LEVEL = 1;
-    private static final int INITIAL_COST = 5;
-    private static final int LEVEL_UP_COST = 3;
-    private static final double HIT_CHANCE = 1.0;
-    private static final int INITIAL_HEAL = 25;
-    private static final int LEVEL_UP_HEAL = 5;
+    private static final int INITIAL_COST = 10;
+    private static final int LEVEL_UP_COST = 5;
+    private static final double INITIAL_HIT_CHANCE = 1.0;
+    private static final int INITIAL_SHIELD_GEN = 1;
 
-    public Heal(){
+    public ShieldUp(){
         super.setName(SKILL_NAME);
         super.setSpritePath(SPRITE_PATH);
         super.setCost(INITIAL_COST);
-        super.setHitChance(HIT_CHANCE);
+        super.setHitChance(INITIAL_HIT_CHANCE);
         super.setSkillLevel(INITIAL_LEVEL);
-        this.setHealPoints(INITIAL_HEAL);
-        super.setDescription("Heal for " + this.getHealPoints() + " HP");
+        this.setShieldGen(INITIAL_SHIELD_GEN);
+        this.description = "Receive " + getShieldGen() + " shield(s)";
     }
-    
+
     // getters && setters
-    public int getHealPoints() {
-        return healPoints;
+    private void setShieldGen(int shieldPoints){
+        int clampedShieldPoints = Math.max(1, shieldPoints);
+        this.shieldPoints = clampedShieldPoints;
     }
-    public void setHealPoints(int healPoints) {
-        int clampedHealPoints = Math.max(1, healPoints);
-        this.healPoints = clampedHealPoints;
+    private int getShieldGen(){
+        return this.shieldPoints;
     }
 
     // skill methods
@@ -46,13 +45,13 @@ public class Heal extends Skill {
             casterCharacter.setSkillPoints(casterSP - skillCost);
 
             if(this.didItHit()){
-                int currentHeal = this.getHealPoints();
-                int targetHealth  = casterCharacter.getLife();
+                int currentShieldGen = this.getShieldGen();
+                int targetShield  = casterCharacter.getShield();
     
-                casterCharacter.setLife(targetHealth + currentHeal);
+                casterCharacter.setShield(targetShield + currentShieldGen);
                 return true;
             }else{
-                return false; // Missed heal
+                return false; // Missed ShieldUp
             }
         }else{
             return false; // Insufficient SP
@@ -65,11 +64,11 @@ public class Heal extends Skill {
             return false;
         }else {
             int currentLevel = this.getSkillLevel();
-            int currentHealing = this.getHealPoints();
+            int currentShieldGen = this.getShieldGen();
             int currentCost = this.getCost();
 
             this.setSkillLevel(currentLevel + 1);
-            this.setHealPoints(currentHealing + LEVEL_UP_HEAL);
+            this.setShieldGen(currentShieldGen + 1);
             this.setCost(currentCost + LEVEL_UP_COST);
             return true;
         }

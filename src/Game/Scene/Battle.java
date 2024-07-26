@@ -75,7 +75,7 @@ public class Battle extends Scene{
     private void addInfoTexts() {
         battleText = new JLabel(BTL_TXT_INIT);
         battleText.setBounds(MARGIN_LEFT, BTL_TXT_Y_POS, WINDOW_WIDTH, BTL_TXT_HEIGHT);
-        battleText.setForeground(Color.BLACK); // Set text color
+        battleText.setForeground(Color.WHITE); // Set text color
         battleText.setFont(new Font(BTL_TEXT_FONT, Font.BOLD, BTL_TXT_FONT_SIZE));
         battleText.setHorizontalAlignment(JLabel.LEFT);
         battleText.setVerticalAlignment(JLabel.TOP);
@@ -83,7 +83,7 @@ public class Battle extends Scene{
 
         playerInfoText = new JLabel(player.GetInfoText());
         playerInfoText.setBounds(PLAYER_INFO_TXT_X_POS, PLAYER_INFO_TXT_Y_POS, INFO_TXT_WIDTH, INFO_TXT_HEIGHT);
-        playerInfoText.setForeground(Color.BLACK); // Set text color
+        playerInfoText.setForeground(Color.WHITE); // Set text color
         playerInfoText.setFont(new Font(INFO_TEXT_FONT, Font.PLAIN, INFO_TXT_FONT_SIZE));
         playerInfoText.setHorizontalAlignment(JLabel.LEFT);
         playerInfoText.setVerticalAlignment(JLabel.TOP);
@@ -91,7 +91,7 @@ public class Battle extends Scene{
 
         enemyInfoText = new JLabel(enemy.GetInfoText());
         enemyInfoText.setBounds(ENEMY_INFO_TXT_X_POS, ENEMY_INFO_TXT_Y_POS, INFO_TXT_WIDTH, INFO_TXT_HEIGHT);
-        enemyInfoText.setForeground(Color.BLACK); // Set text color
+        enemyInfoText.setForeground(Color.WHITE); // Set text color
         enemyInfoText.setFont(new Font(INFO_TEXT_FONT, Font.PLAIN, INFO_TXT_FONT_SIZE));
         enemyInfoText.setHorizontalAlignment(JLabel.LEFT);
         enemyInfoText.setVerticalAlignment(JLabel.TOP);
