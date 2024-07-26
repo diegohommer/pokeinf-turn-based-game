@@ -39,15 +39,16 @@ public class MultiAttack extends Skill {
         return damagePerHit;
     }
     public void setDamagePerHit(int damagePerHit) {
-        this.damagePerHit = damagePerHit;
+        int clampedDamagePerHit = Math.max(1, damagePerHit);
+        this.damagePerHit = clampedDamagePerHit;
     }
 
     public int getMaxAttacks() {
         return maxAttacks;
     }
-
-    public void setMaxAttacks(int maxAtacks) {
-        this.maxAttacks = maxAtacks;
+    public void setMaxAttacks(int maxAttacks) {
+        int clampedMaxAttacks = Math.max(1, maxAttacks);
+        this.maxAttacks = clampedMaxAttacks;
     }
 
     // class specific methods

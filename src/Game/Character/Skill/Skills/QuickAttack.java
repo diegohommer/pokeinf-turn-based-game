@@ -31,8 +31,9 @@ public class QuickAttack extends Skill {
     }
 
     // getters && setters
-    private void setDamage(int value){
-        this.damage = value;
+    private void setDamage(int damage){
+        int clampedDamage = Math.max(1, damage);
+        this.damage = clampedDamage;
     }
     private int getDamage(){
         return this.damage;

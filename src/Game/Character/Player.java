@@ -15,7 +15,7 @@ public class Player extends Character{
     private static final int SP_INITIAL = 50;
     private static final int SH_INITIAL = 50;
     private static final int MAX_SKILL_INDEX = 3;
-    private static final String SPRITE_PATH = "assets//attackSkill.png";
+    private static final String SPRITE_PATH = "assets//dennis.jpg";
 
     public Player(String name){
         super(
@@ -24,7 +24,7 @@ public class Player extends Character{
             LP_INITIAL, 
             SH_INITIAL, 
             SP_INITIAL, 
-            new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new ErrorSkill())));
+            new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new Rest())));
 
             
         this.unlockedSkillsList = new ArrayList<>();
