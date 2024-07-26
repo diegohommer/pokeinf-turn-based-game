@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import Game.Character.Skill.Skill;
+import Game.Character.Skill.Skills.AtaqueRapido;
+import Game.Character.Skill.Skills.Cura;
 import Game.Character.Skill.Skills.ErrorSkill;
 import Game.Character.Skill.Skills.MultiAttack;
 
@@ -24,7 +26,7 @@ public class Player extends Character{
             LP_INITIAL, 
             SH_INITIAL, 
             SP_INITIAL, 
-            new ArrayList<>(Arrays.asList(new MultiAttack(), new ErrorSkill(), new ErrorSkill(), new ErrorSkill())));
+            new ArrayList<>(Arrays.asList(new AtaqueRapido(), new MultiAttack(), new Cura(), new ErrorSkill())));
             
         this.unlockedSkillsList = new ArrayList<>();
     }
