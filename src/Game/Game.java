@@ -61,7 +61,7 @@ public class Game extends JFrame {
             "Enemy0", 
             100, 
             60, 
-            new ArrayList<>(Arrays.asList(new AtaqueRapido(), new MultiAttack(), new Cura(), new ErrorSkill()))));
+            new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new ErrorSkill()))));
     }
 
     public STATE getGameState(){

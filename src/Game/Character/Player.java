@@ -24,7 +24,7 @@ public class Player extends Character{
             LP_INITIAL, 
             SH_INITIAL, 
             SP_INITIAL, 
-            new ArrayList<>(Arrays.asList(new FastAttack(), new MultiAttack(), new Heal(), new ErrorSkill())));
+            new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new ErrorSkill())));
 
             
         this.unlockedSkillsList = new ArrayList<>();

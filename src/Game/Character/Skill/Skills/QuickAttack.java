@@ -3,13 +3,13 @@ package Game.Character.Skill.Skills;
 import Game.Character.Character;
 import Game.Character.Skill.Skill;
 
-public class FastAttack extends Skill {
+public class QuickAttack extends Skill {
     // class specific atributes
     private int damage;
 
     // class constants
     private static final String SPRITE_PATH = "assets//attackSkill.png";
-    private static final String SKILL_NAME = "Fast-Attack";
+    private static final String SKILL_NAME = "Quick-Attack";
     private static final int INITIAL_LEVEL = 1;
     private static final int INITIAL_COST = 5;
     private static final int LEVEL_UP_COST = 2;
@@ -19,7 +19,7 @@ public class FastAttack extends Skill {
     private static final int PERCENTAGE = 100;
 
 
-    public FastAttack(){
+    public QuickAttack(){
         super.setName(SKILL_NAME);
         super.setSpritePath(SPRITE_PATH);
         super.setCost(INITIAL_COST);
