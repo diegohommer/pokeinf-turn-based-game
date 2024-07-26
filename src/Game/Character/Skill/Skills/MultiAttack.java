@@ -14,10 +14,10 @@ public class MultiAttack extends Skill {
     private static final int INITIAL_LEVEL = 1;
     private static final int INITIAL_COST = 10;
     private static final int LEVEL_UP_COST = 5;
-    private static final int INITIAL_DAMAGE = 15;
-    private static final int LEVEL_UP_DAMAGE = 5;
     private static final double INITIAL_HIT_CHANCE = 0.5;
     private static final double LEVEL_UP_HIT_CHANCE = 0.05;
+    private static final int INITIAL_DAMAGE = 15;
+    private static final int LEVEL_UP_DAMAGE = 5;
     private static final int INITIAL_MAX_ATACKS = 3;
     private static final int PERCENTAGE = 100;
 
@@ -64,29 +64,35 @@ public class MultiAttack extends Skill {
     // skill methods
     @Override
     public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
-        int hitTimes = findNumAttacks();
+        int casterSP = casterCharacter.getSkillPoints();
+        int skillCost = super.getCost();
 
-        if(hitTimes == 0){
-            return false;
-        }else{
-            for (int i = 0; i < hitTimes; i++) {
-                int currentDamage = this.getDamagePerHit();
-                int targetShield = targetCharacter.getShield();
-                int targetHealth  = targetCharacter.getLife();
-    
-                if(targetShield <= 0){
-                    targetHealth -= currentDamage;
-                }else
-                    targetShield--;
-    
-                targetCharacter.setShield(targetShield);
-                targetCharacter.setLife(targetHealth);
-                System.out.println(targetCharacter.getLife());
-                if(targetCharacter.isDead()) break;
+        if(casterSP >= skillCost){
+            casterCharacter.setSkillPoints(casterSP - skillCost);
+            int hitTimes = findNumAttacks();
+
+            if(hitTimes == 0) {
+                return false; // Missed all attacks
+            }else{
+                for (int i = 0; (i < hitTimes) && (!targetCharacter.isDead()); i++) {
+                    int currentDamage = this.getDamagePerHit();
+                    int targetShield = targetCharacter.getShield();
+                    int targetHealth  = targetCharacter.getLife();
+            
+                    if(targetShield <= 0){
+                        targetHealth -= currentDamage;
+                    }else
+                        targetShield--;
+            
+                    targetCharacter.setShield(targetShield);
+                    targetCharacter.setLife(targetHealth);
+                    System.out.println(targetCharacter.getLife());
+                }
+                return true;
             }
-            return true;
+        }else{
+            return false; // Insufficient SP
         }
-
     }
 
     @Override

@@ -13,9 +13,9 @@ public class Heal extends Skill {
     private static final int INITIAL_LEVEL = 1;
     private static final int INITIAL_COST = 5;
     private static final int LEVEL_UP_COST = 3;
+    private static final double HIT_CHANCE = 1.0;
     private static final int INITIAL_HEAL = 25;
     private static final int LEVEL_UP_HEAL = 5;
-    private static final double HIT_CHANCE = 1.0;
 
     public Heal(){
         super.setName(SKILL_NAME);
@@ -39,14 +39,23 @@ public class Heal extends Skill {
     // skill methods
     @Override
     public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
-        if(this.didItHit()){
-            int currentHeal = this.getHealPoints();
-            int targetHealth  = casterCharacter.getLife();
+        int casterSP = casterCharacter.getSkillPoints();
+        int skillCost = super.getCost();
 
-            casterCharacter.setLife(targetHealth + currentHeal);
-            return true;
+        if(casterSP >= skillCost){
+            casterCharacter.setSkillPoints(casterSP - skillCost);
+
+            if(this.didItHit()){
+                int currentHeal = this.getHealPoints();
+                int targetHealth  = casterCharacter.getLife();
+    
+                casterCharacter.setLife(targetHealth + currentHeal);
+                return true;
+            }else{
+                return false; // Missed heal
+            }
         }else{
-            return false;
+            return false; // Insufficient SP
         }
     }
 
