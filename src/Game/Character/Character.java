@@ -18,16 +18,17 @@ public abstract class Character {
     protected int maxSkillPoints;
     protected ArrayList<Skill> activeSkills;
     
-    Character(String spritePath, String name, int life, int maxShield, int skillPoints, ArrayList<Skill> activeSkills)
+    protected Character(String spritePath, String name, int life, int maxShield, int skillPoints, ArrayList<Skill> activeSkills)
     {
-        setName(name);
-        setMaxLife(life);
-        setLife(life);
-        setMaxShield(maxShield);
-        setShield(0);
-        setMaxSkillPoints(skillPoints);
-        setSkillPoints(skillPoints);
-        setActiveSkills(activeSkills);
+        this.setSpritePath(spritePath);
+        this.setName(name);
+        this.setMaxLife(life);
+        this.setLife(life);
+        this.setMaxShield(maxShield);
+        this.setShield(0);
+        this.setMaxSkillPoints(skillPoints);
+        this.setSkillPoints(skillPoints);
+        this.setActiveSkills(activeSkills);
     }
 
     public String getName() {
@@ -68,7 +69,7 @@ public abstract class Character {
         this.shield = clampedShield;
     }
 
-    public List<Skill> getActiveSkills() {
+    public ArrayList<Skill> getActiveSkills() {
         return activeSkills;
     }
     public boolean setActiveSkills(ArrayList<Skill> activeSkills) {
@@ -133,5 +134,9 @@ public abstract class Character {
             return true;
         }
         return false;
+    }
+
+    public boolean isDead(){
+        return this.getLife() == 0;
     }
 }

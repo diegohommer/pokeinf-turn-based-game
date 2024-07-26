@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import Game.Character.Skill.Skill;
 import Game.Character.Skill.Skills.ErrorSkill;
+import Game.Character.Skill.Skills.MultiAttack;
 
 public class Player extends Character{
     private ArrayList<Skill> unlockedSkillsList;
@@ -23,7 +24,7 @@ public class Player extends Character{
             LP_INITIAL, 
             SH_INITIAL, 
             SP_INITIAL, 
-            new ArrayList<>(Arrays.asList(new ErrorSkill(), new ErrorSkill(), new ErrorSkill(), new ErrorSkill())));
+            new ArrayList<>(Arrays.asList(new MultiAttack(), new ErrorSkill(), new ErrorSkill(), new ErrorSkill())));
             
         this.unlockedSkillsList = new ArrayList<>();
     }
@@ -31,7 +32,6 @@ public class Player extends Character{
     public ArrayList<Skill> getUnlockedSkillsList() {
         return unlockedSkillsList;
     }
-
     public void setUnlockedSkillsList(ArrayList<Skill> unlockedSkillsList) {
         this.unlockedSkillsList = unlockedSkillsList;
     }
@@ -44,7 +44,7 @@ public class Player extends Character{
         Iterator<Skill> iterator = unlockedSkills.iterator();
         while (iterator.hasNext()) {
             Skill skill = iterator.next();
-            if(skill.getName() == newSkill.getName()){
+            if(skill.getName().equals(newSkill.getName())){
                 return false;
             }
         }
@@ -54,7 +54,7 @@ public class Player extends Character{
     }
 
     //coloca a skill selecionada no slot desejado
-    public boolean setSkillSlot(Skill selectedSkill,int slot){
+    public boolean setSkillSlot(Skill selectedSkill, int slot){
         if(slot < 0 || slot > MAX_SKILL_INDEX){
             return false;
         }else{
