@@ -21,10 +21,19 @@ public class Battle extends Scene{
     private static final int MARGIN_LEFT = 50;
 
     private static final int BTL_TXT_HEIGHT = 100;
-    private static final int BTL_TXT_YPOS = 550;
+    private static final int BTL_TXT_Y_POS = 550;
     private static final int BTL_TXT_FONT_SIZE = 24;
     private static final String BTL_TEXT_FONT = "Courier New";
     private static final String BTL_TXT_INIT = "A batalha começa!";
+
+    private static final int INFO_TXT_WIDTH = 300;
+    private static final int INFO_TXT_HEIGHT = 300;
+    private static final int INFO_TXT_FONT_SIZE = 20;
+    private static final String INFO_TEXT_FONT = "Courier New";
+    private static final int PLAYER_INFO_TXT_X_POS = 300;
+    private static final int PLAYER_INFO_TXT_Y_POS = 400;
+    private static final int ENEMY_INFO_TXT_X_POS = 350;
+    private static final int ENEMY_INFO_TXT_Y_POS = 60;
 
     private static final int BUTTON_WIDTH = 180;
     private static final int BUTTON_HEIGHT = 50;
@@ -32,14 +41,16 @@ public class Battle extends Scene{
 
     private static final int CHARACTER_HEIGHT = 250;
     private static final int CHARACTER_WIDTH = 180;
-    private static final int PLAYER_XPOS = 100;
-    private static final int PLAYER_YPOS = 280;
-    private static final int ENEMY_XPOS = 700;
-    private static final int ENEMY_YPOS = 30;
+    private static final int PLAYER_X_POS = 100;
+    private static final int PLAYER_Y_POS = 280;
+    private static final int ENEMY_X_POS = 700;
+    private static final int ENEMY_Y_POS = 30;
 
     private Game game;
     private Player player;
+    private JLabel playerInfoText;
     private Enemy enemy;
+    private JLabel enemyInfoText;
     private JLabel battleText;
     private ArrayList<JButton> skillButtons = new ArrayList<JButton>();
     JButton continueButton;
@@ -56,29 +67,47 @@ public class Battle extends Scene{
     private void createUI()
     {
         setLayout(null);
-        addBattleText();
+        addInfoTexts();
         addButtons();
         addCharacterSprites();
     }
 
-    private void addBattleText() {
+    private void addInfoTexts() {
         battleText = new JLabel(BTL_TXT_INIT);
-        battleText.setBounds(MARGIN_LEFT,BTL_TXT_YPOS, WINDOW_WIDTH, BTL_TXT_HEIGHT);
-        battleText.setForeground(Color.BLACK); // Set text color
+        battleText.setBounds(MARGIN_LEFT, BTL_TXT_Y_POS, WINDOW_WIDTH, BTL_TXT_HEIGHT);
+        battleText.setForeground(Color.WHITE); // Set text color
         battleText.setFont(new Font(BTL_TEXT_FONT, Font.BOLD, BTL_TXT_FONT_SIZE));
         battleText.setHorizontalAlignment(JLabel.LEFT);
         battleText.setVerticalAlignment(JLabel.TOP);
         add(battleText);
+
+        playerInfoText = new JLabel(player.GetInfoText());
+        playerInfoText.setBounds(PLAYER_INFO_TXT_X_POS, PLAYER_INFO_TXT_Y_POS, INFO_TXT_WIDTH, INFO_TXT_HEIGHT);
+        playerInfoText.setForeground(Color.WHITE); // Set text color
+        playerInfoText.setFont(new Font(INFO_TEXT_FONT, Font.PLAIN, INFO_TXT_FONT_SIZE));
+        playerInfoText.setHorizontalAlignment(JLabel.LEFT);
+        playerInfoText.setVerticalAlignment(JLabel.TOP);
+        add(playerInfoText);
+
+        enemyInfoText = new JLabel(enemy.GetInfoText());
+        enemyInfoText.setBounds(ENEMY_INFO_TXT_X_POS, ENEMY_INFO_TXT_Y_POS, INFO_TXT_WIDTH, INFO_TXT_HEIGHT);
+        enemyInfoText.setForeground(Color.WHITE); // Set text color
+        enemyInfoText.setFont(new Font(INFO_TEXT_FONT, Font.PLAIN, INFO_TXT_FONT_SIZE));
+        enemyInfoText.setHorizontalAlignment(JLabel.LEFT);
+        enemyInfoText.setVerticalAlignment(JLabel.TOP);
+        add(enemyInfoText);
     }
 
     private void addButtons() {
         for(int i = 0; i < player.getActiveSkills().size(); i++)
         {
-            JButton skillButton = new JButton("Skill " + Integer.toString(i));
+            final Skill skill = this.player.selectSkill(i);
+
+            JButton skillButton = new JButton("<html>" + skill.getName() + "<br> Custo: " + Integer.toString(skill.getCost()) + "</html>");
             skillButtons.add(skillButton);
             skillButton.setBounds(BUTTON_X_POS + BUTTON_X_OFFSET * i, BUTTON_Y_POS, BUTTON_WIDTH, BUTTON_HEIGHT);
+            skillButton.setHorizontalAlignment(JButton.CENTER);
 
-            final Skill skill = this.player.selectSkill(i);
             // Determine what the button does when it's clicked
             skillButton.addActionListener(new ActionListener() {
                 @Override
@@ -96,12 +125,7 @@ public class Battle extends Scene{
         continueButton.setBounds(BUTTON_X_POS + BUTTON_X_OFFSET * skillButtons.size(), BUTTON_Y_POS, BUTTON_WIDTH, BUTTON_HEIGHT);
 
         // Determine what the button does when it's clicked
-        continueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playerChooseSkill();
-            }
-        });
+        setContinueActionListener(() -> playerChooseSkill());
 
         add(continueButton);
     }
@@ -112,7 +136,7 @@ public class Battle extends Scene{
             Image scaledImage = playerImage.getScaledInstance(CHARACTER_WIDTH, CHARACTER_HEIGHT, Image.SCALE_SMOOTH);
             ImageIcon playerIcon = new ImageIcon(scaledImage);
             JLabel playerSprite = new JLabel(playerIcon);
-            playerSprite.setBounds(PLAYER_XPOS, PLAYER_YPOS, CHARACTER_WIDTH, CHARACTER_HEIGHT);
+            playerSprite.setBounds(PLAYER_X_POS, PLAYER_Y_POS, CHARACTER_WIDTH, CHARACTER_HEIGHT);
 
             add(playerSprite);
         } catch (IOException e) {
@@ -124,7 +148,7 @@ public class Battle extends Scene{
             Image scaledImage = enemyImage.getScaledInstance(CHARACTER_WIDTH, CHARACTER_HEIGHT, Image.SCALE_SMOOTH);
             ImageIcon enemyIcon = new ImageIcon(scaledImage);
             JLabel enemySprite = new JLabel(enemyIcon);
-            enemySprite.setBounds(ENEMY_XPOS, ENEMY_YPOS, CHARACTER_WIDTH, CHARACTER_HEIGHT);
+            enemySprite.setBounds(ENEMY_X_POS, ENEMY_Y_POS, CHARACTER_WIDTH, CHARACTER_HEIGHT);
 
             add(enemySprite);
         } catch (IOException e) {
@@ -147,14 +171,17 @@ public class Battle extends Scene{
         playerSkill.applyEffect(player, enemy);
 
         battleText.setText(playerSkill.getName() + " utilizada contra " + enemy.getName() + "!");
+        playerInfoText.setText(player.GetInfoText());
+        enemyInfoText.setText(enemy.GetInfoText());
 
-        continueButton.removeActionListener(continueButton.getActionListeners()[0]);
-        continueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enemyPrepareMove();
-            }
-        });
+        if(enemy.isDead())
+        {
+            setContinueActionListener(() -> playerWon());
+        }
+        else
+        {
+            setContinueActionListener(() -> enemyPrepareMove());
+        }
         continueButton.setVisible(true);
 
         for (JButton skillButton : skillButtons) {
@@ -166,13 +193,7 @@ public class Battle extends Scene{
     {
         battleText.setText("O inimigo se prepara para revidar!");
 
-        continueButton.removeActionListener(continueButton.getActionListeners()[0]);
-        continueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enemyMakeMove();
-            }
-        });
+        setContinueActionListener(() -> enemyMakeMove());
     }
 
     private void enemyMakeMove()
@@ -181,12 +202,60 @@ public class Battle extends Scene{
         enemySkill.applyEffect(enemy, player);
 
         battleText.setText(enemy.getName() + " revida com a habilidade " + enemySkill.getName() + "!");
+        playerInfoText.setText(player.GetInfoText());
+        enemyInfoText.setText(enemy.GetInfoText());
 
-        continueButton.removeActionListener(continueButton.getActionListeners()[0]);
+        if(player.isDead())
+        {
+            setContinueActionListener(() -> playerLost());
+        }
+        else
+        {
+            setContinueActionListener(() -> playerChooseSkill());
+        }
+    }
+
+    private void playerWon()
+    {
+        battleText.setText("Você derrotou " + enemy.getName() + "!");
+
+        game.advanceEnemy();
+
+        setContinueActionListener(() -> terminateBattle());
+
+        for (JButton skillButton : skillButtons) {
+            skillButton.setVisible(false);
+        }
+    }
+
+    private void playerLost()
+    {
+        battleText.setText(enemy.getName() + " derrotou você!");
+
+        setContinueActionListener(() -> terminateBattle());
+
+        for (JButton skillButton : skillButtons) {
+            skillButton.setVisible(false);
+        }
+    }
+
+    private void terminateBattle()
+    {
+        player.resetStatus();
+        enemy.resetStatus();
+        game.setGameState(Game.STATE.CHOOSE_SKILL);
+    }
+
+    private void setContinueActionListener(Runnable action)
+    {
+        for (ActionListener actionList : continueButton.getActionListeners()) {
+            continueButton.removeActionListener(actionList);
+        }
+
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerChooseSkill();
+                action.run();
             }
         });
     }

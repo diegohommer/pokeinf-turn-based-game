@@ -39,7 +39,7 @@ public class Game extends JFrame {
         setLayout(new BorderLayout());
         setPlayer(new Player(PLAYER_NAME));
         initEnemies();
-        setGameState(STATE.MENU);
+        setGameState(STATE.BATTLE);
     }
 
     public Player getPlayer(){
@@ -57,11 +57,11 @@ public class Game extends JFrame {
     private void initEnemies()
     {
         enemies.add(new Enemy(
-            "assets//attackSkill.png", 
-            "Enemy0", 
+            "assets//pimenta.jpg", 
+            "Pimenta", 
             100, 
             60, 
-            new ArrayList<>(Arrays.asList(new ErrorSkill()))));
+            new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new ErrorSkill()))));
     }
 
     public STATE getGameState(){
@@ -100,5 +100,13 @@ public class Game extends JFrame {
         }
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
+    }
+
+    public void advanceEnemy()
+    {
+        if(++currentEnemyIndex >= enemies.size())
+        {
+            currentEnemyIndex = 0;
+        }
     }
 }

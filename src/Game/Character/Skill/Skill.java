@@ -14,13 +14,14 @@ public abstract class Skill {
 
     private final int MAX_LEVEL = 5;
 
-    //variavel de classe
+    // class variable
     public static ArrayList<Skill> createdSkills = new ArrayList<>();
 
-    // Métodos que devem ser criados em todas as habilidades separadamente
+    // abstract methods
     public abstract boolean applyEffect(Character casterCharacter, Character targetCharacter);
     public abstract boolean upgradeEffect();
 
+    // getters && setters
     public String getSpritePath(){
         return this.spritePath;
     }
