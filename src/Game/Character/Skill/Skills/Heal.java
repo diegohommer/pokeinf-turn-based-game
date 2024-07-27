@@ -24,6 +24,7 @@ public class Heal extends Skill {
         super.setHitChance(HIT_CHANCE);
         super.setSkillLevel(INITIAL_LEVEL);
         this.setHealPoints(INITIAL_HEAL);
+        this.setType(Skill.Type.HEALING);
         super.setDescription("Heal for " + this.getHealPoints() + " HP");
     }
     
@@ -61,7 +62,7 @@ public class Heal extends Skill {
 
     @Override
     public boolean upgradeEffect() {
-        if(this.isMaxLevel()){
+        if(Skill.isMaxLevel(this)){
             return false;
         }else {
             int currentLevel = this.getSkillLevel();

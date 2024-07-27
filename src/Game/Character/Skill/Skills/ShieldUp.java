@@ -22,6 +22,7 @@ public class ShieldUp extends Skill{
         super.setCost(INITIAL_COST);
         super.setHitChance(INITIAL_HIT_CHANCE);
         super.setSkillLevel(INITIAL_LEVEL);
+        super.setType(Skill.Type.SHIELD);
         this.setShieldGen(INITIAL_SHIELD_GEN);
         this.description = "Receive " + getShieldGen() + " shield(s)";
     }
@@ -60,7 +61,7 @@ public class ShieldUp extends Skill{
 
     @Override
     public boolean upgradeEffect() {
-        if(this.isMaxLevel()){
+        if(Skill.isMaxLevel(this)){
             return false;
         }else {
             int currentLevel = this.getSkillLevel();

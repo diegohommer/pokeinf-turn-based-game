@@ -1,11 +1,8 @@
 package Game.Character;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import Game.Character.Skill.Skill;
-import Game.Character.Skill.Skills.ErrorSkill;
 
 public abstract class Character {
     protected String spritePath;

@@ -23,6 +23,7 @@ public class Rest extends Skill{
         super.setHitChance(INITIAL_HIT_CHANCE);
         super.setSkillLevel(INITIAL_LEVEL);
         this.setSPGen(INITIAL_SP_GEN);
+        this.setType(Skill.Type.REST);
         this.description = "Receive " + getSPGen() + " SP";
     }
 
@@ -59,7 +60,7 @@ public class Rest extends Skill{
 
     @Override
     public boolean upgradeEffect() {
-        if(this.isMaxLevel()){
+        if(Skill.isMaxLevel(this)){
             return false;
         }else {
             int currentLevel = this.getSkillLevel();

@@ -39,7 +39,7 @@ public class Game extends JFrame {
         setLayout(new BorderLayout());
         setPlayer(new Player(PLAYER_NAME));
         initEnemies();
-        setGameState(STATE.BATTLE);
+        setGameState(STATE.MENU);
     }
 
     public Player getPlayer(){
@@ -61,7 +61,7 @@ public class Game extends JFrame {
             "Pimenta", 
             100, 
             60, 
-            new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new ErrorSkill()))));
+            new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new Rest()))));
     }
 
     public STATE getGameState(){

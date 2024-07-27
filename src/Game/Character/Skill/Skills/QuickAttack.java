@@ -26,6 +26,7 @@ public class QuickAttack extends Skill {
         super.setHitChance(INITIAL_HIT_CHANCE);
         super.setSkillLevel(INITIAL_LEVEL);
         this.setDamage(INITIAL_DAMAGE);
+        this.setType(Skill.Type.DAMAGE);
         this.description = "Attack for " + this.damage + " damage with a " + 
                             (this.hitChance * PERCENTAGE) + "% chance to hit the target";
     }
@@ -72,7 +73,7 @@ public class QuickAttack extends Skill {
 
     @Override
     public boolean upgradeEffect(){
-        if(this.isMaxLevel()){
+        if(Skill.isMaxLevel(this)){
             return false;
         }else {
             int currentLevel = this.getSkillLevel();
