@@ -3,7 +3,6 @@ package Game.Scene;
 import Game.Game;
 import Game.Character.*;
 import Game.Character.Skill.*;
-import Game.Character.Skill.Skills.*;
 import Game.Scene.UI.SkillCard;
 
 import java.util.ArrayList;

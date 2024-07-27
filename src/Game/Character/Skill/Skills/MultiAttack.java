@@ -106,7 +106,7 @@ public class MultiAttack extends Skill {
             int currentCost = super.getCost();
             double currentHitChance = super.getHitChance();
 
-            super.setSkillLevel(currentLevel++);
+            super.setSkillLevel(currentLevel+ 1);
             this.setDamagePerHit(currentDamage + LEVEL_UP_DAMAGE);
             super.setCost(currentCost + LEVEL_UP_COST);
             super.setHitChance(currentHitChance + LEVEL_UP_HIT_CHANCE);

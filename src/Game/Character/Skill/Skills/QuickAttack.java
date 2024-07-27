@@ -25,12 +25,13 @@ public class QuickAttack extends Skill {
         this.description = "Ataca por " + this.damage + " de dano";
     }
 
+    public int getDamage(){
+        return this.damage;
+    }
+
     // Getters e setters importantes para a classe
     private void setDamage(int value){
         this.damage = value;
-    }
-    private int getDamage(){
-        return this.damage;
     }
 
     @Override
