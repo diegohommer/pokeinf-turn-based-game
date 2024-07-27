@@ -1,7 +1,5 @@
 package Game.Character.Skill;
 
-import java.util.ArrayList;
-
 import Game.Character.Character;
 
 public abstract class Skill {
@@ -12,10 +10,18 @@ public abstract class Skill {
     protected int skillLevel;
     protected double hitChance;
 
-    private final int MAX_LEVEL = 5;
+    // Atributo de classe
+    private static final int MAX_LEVEL = 5;
 
-    // class variable
-    public static ArrayList<Skill> createdSkills = new ArrayList<>();
+    public enum Type
+    {
+        DAMAGE,
+        HEALING,
+        REST,
+        SHIELD,
+        NONE
+    }
+    protected Type type = Type.NONE;
 
     // abstract methods
     public abstract boolean applyEffect(Character casterCharacter, Character targetCharacter);
@@ -79,19 +85,20 @@ public abstract class Skill {
         this.hitChance = clampedHitChance;
     }
 
-
-    public static ArrayList<Skill> getCreatedSkills(){
-        return createdSkills;
+    public Type getType()
+    {
+        return type;
     }
-    public static void addCreatedSkill(Skill newSkill){
-        createdSkills.add(newSkill);
+    protected void setType(Type t)
+    {
+        type = t;
     }
 
-
-    public boolean isMaxLevel(){
-        return this.getSkillLevel() == MAX_LEVEL;
+    // Método de classe
+    public static boolean isMaxLevel(Skill skill){
+        return skill.getSkillLevel() == MAX_LEVEL;
     }
-    
+
     public boolean didItHit(){
         double randNum = Math.random(); // Random double between 0.0 and 1.0
         return randNum <= this.getHitChance();

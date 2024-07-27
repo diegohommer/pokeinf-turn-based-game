@@ -29,6 +29,7 @@ public class MultiAttack extends Skill {
         super.setSkillLevel(INITIAL_LEVEL);
         this.setDamagePerHit(INITIAL_DAMAGE);
         this.setMaxAttacks(INITIAL_MAX_ATACKS);
+        this.setType(Skill.Type.DAMAGE);
         super.setDescription("Do a sequence of " + this.getMaxAttacks() + 
                              " attacks that hit for " + this.damagePerHit + " damage each, with " + 
                              (this.hitChance * PERCENTAGE) + "% chance to hit each one.");
@@ -98,7 +99,7 @@ public class MultiAttack extends Skill {
 
     @Override
     public boolean upgradeEffect() {
-        if(super.isMaxLevel()){
+        if(Skill.isMaxLevel(this)){
             return false;
         }else {
             int currentLevel = super.getSkillLevel();

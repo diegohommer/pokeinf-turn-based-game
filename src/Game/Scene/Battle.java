@@ -198,7 +198,7 @@ public class Battle extends Scene{
 
     private void enemyMakeMove()
     {
-        final Skill enemySkill = enemy.resolveNextSkill();
+        final Skill enemySkill = enemy.resolveNextSkill(player);
         enemySkill.applyEffect(enemy, player);
 
         battleText.setText(enemy.getName() + " revida com a habilidade " + enemySkill.getName() + "!");

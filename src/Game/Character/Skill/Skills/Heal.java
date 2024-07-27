@@ -8,21 +8,26 @@ public class Heal extends Skill {
     //atributos de efeito
     private int healPoints;
 
-    //constantes de controle
+    //constantes
     private final int INITIAL_COST = 5;
     private final int COST_LEVEL_UP = 3;
-    private final int INITIAL_CURE = 25;
+    private final int INITIAL_HEAL = 25;
     private final int CURE_LEVEL_UP = 5;
     private final double HIT_CHANCE = 0.8;
+    private final String SKILL_NAME = "Heal";
+    private final String SPRITE_PATH = "assets//heal.jpg";
+    private final int INITIAL_LEVEL = 1;
+
 
     public Heal(){
-        this.name="Cura";
-        this.spritePath="assets//cureSkill.png";
-        this.cost=INITIAL_COST;
-        this.healPoints=INITIAL_CURE;
-        this.hitChance=HIT_CHANCE;
-        this.skillLevel=1;
-        this.description = "Cura por " + this.healPoints + " de vida";
+        super.setName(SKILL_NAME);
+        super.setSpritePath(SPRITE_PATH);
+        super.setCost(INITIAL_COST);
+        super.setHitChance(HIT_CHANCE);
+        super.setSkillLevel(INITIAL_LEVEL);
+        this.setHealPoints(INITIAL_HEAL);
+        this.setType(Skill.Type.HEALING);
+        super.setDescription("Heal for " + this.getHealPoints() + " HP");
     }
     
     public int getHealPoints() {
@@ -35,7 +40,12 @@ public class Heal extends Skill {
 
     @Override
     public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
-        if(this.didItHit()){
+        int casterSP = casterCharacter.getSkillPoints();
+        int skillCost = super.getCost();
+
+        if(casterSP >= skillCost){
+            casterCharacter.setSkillPoints(casterSP - skillCost);
+            
             int currentHeal = this.getHealPoints();
             int targetLife = casterCharacter.getLife();
             int maxLife = casterCharacter.getMaxLife();
@@ -53,7 +63,7 @@ public class Heal extends Skill {
     }
     @Override
     public boolean upgradeEffect() {
-        if(this.isMaxLevel()){
+        if(Skill.isMaxLevel(this)){
             return false;
         }else {
             int currentLevel = this.getSkillLevel();
