@@ -4,19 +4,19 @@ import Game.Character.Character;
 import Game.Character.Skill.Skill;
 
 public class QuickAttack extends Skill {
-    // class specific atributes
+    //efeito da classe ataquerapido
     private int damage;
 
-    // class constants
-    private static final String SPRITE_PATH = "assets//attackSkill.png";
-    private static final String SKILL_NAME = "Quick-Attack";
-    private static final int INITIAL_LEVEL = 1;
-    private static final int INITIAL_COST = 5;
-    private static final int LEVEL_UP_COST = 2;
-    private static final double INITIAL_HIT_CHANCE = 0.9;
-    private static final int INITIAL_DAMAGE = 20;
-    private static final int LEVEL_UP_DAMAGE = 5;
-    private static final int PERCENTAGE = 100;
+    //constantes de controle
+    private final int INITIAL_DAMAGE = 20;
+    private final int DAMAGE_LEVEL_UP = 5;
+    private final int INITIAL_COST = 5;
+    private final int COST_LEVEL_UP = 2;
+    private final double INITIAL_HIT_CHANCE = 0.7;
+    private final String SKILL_NAME = "Quick Attack";
+    private final String SPRITE_PATH = "assets//quick_attack.jpg";
+    private final int INITIAL_LEVEL = 1;
+    private final int PERCENTAGE = 100;
 
 
     public QuickAttack(){
@@ -31,47 +31,17 @@ public class QuickAttack extends Skill {
                             (this.hitChance * PERCENTAGE) + "% chance to hit the target";
     }
 
-    // getters && setters
-    private void setDamage(int damage){
-        int clampedDamage = Math.max(1, damage);
-        this.damage = clampedDamage;
-    }
-    private int getDamage(){
+    public int getDamage(){
         return this.damage;
     }
 
-    // skill methods
-    @Override
-    public boolean applyEffect(Character casterCharacter, Character targetCharacter){
-        int casterSP = casterCharacter.getSkillPoints();
-        int skillCost = super.getCost();
-
-        if(casterSP >= skillCost){
-            casterCharacter.setSkillPoints(casterSP - skillCost);
-
-            if(this.didItHit()){
-                int currentDamage = this.getDamage();
-                int targetShield = targetCharacter.getShield();
-                int targetHealth  = targetCharacter.getLife();
-    
-                if(targetShield <= 0){
-                    targetHealth -= currentDamage;
-                }else
-                    targetShield--;
-    
-                targetCharacter.setShield(targetShield);
-                targetCharacter.setLife(targetHealth);
-                System.out.println(targetCharacter.getLife());
-                return true;
-            }else{
-                return false; // Missed attack
-            }
-        }else{
-            return false; // Insufficient SP
-        }
+    // Getters e setters importantes para a classe
+    private void setDamage(int value){
+        this.damage = value;
     }
 
     @Override
+    // Não melhora o efeito caso ele estiver no nivel maximo, senão, adiciona 5 ao dano causado
     public boolean upgradeEffect(){
         if(Skill.isMaxLevel(this)){
             return false;
@@ -81,10 +51,42 @@ public class QuickAttack extends Skill {
             int currentCost = this.getCost();
 
             this.setSkillLevel(currentLevel + 1);
-            this.setDamage(currentDamage + LEVEL_UP_DAMAGE);
-            this.setCost(currentCost + LEVEL_UP_COST);
+            this.setDamage(currentDamage + DAMAGE_LEVEL_UP);
+            this.setCost(currentCost + COST_LEVEL_UP);
             return true;
         }
     }
 
+    @Override
+    public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
+        if (this.didItHit()) {
+            int casterSP = casterCharacter.getSkillPoints();
+            int skillCost = super.getCost();
+    
+            if(casterSP >= skillCost){
+                casterCharacter.setSkillPoints(casterSP - skillCost);
+            
+                int currentDamage = this.getDamage();
+                int targetShield = targetCharacter.getShield();
+                int targetLife = targetCharacter.getLife();
+
+                targetShield = targetShield - 1;
+                if (targetShield < 0) {
+                    targetLife = targetLife - currentDamage;
+                    targetShield = 0;
+                    if (targetLife < 0) {
+                        targetLife = 0;
+                    }
+                }
+
+                targetCharacter.setShield(targetShield);
+                targetCharacter.setLife(targetLife);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }

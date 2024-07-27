@@ -28,11 +28,11 @@ public class ShieldUp extends Skill{
     }
 
     // getters && setters
-    private void setShieldGen(int shieldPoints){
+    public void setShieldGen(int shieldPoints){
         int clampedShieldPoints = Math.max(1, shieldPoints);
         this.shieldPoints = clampedShieldPoints;
     }
-    private int getShieldGen(){
+    public int getShieldGen(){
         return this.shieldPoints;
     }
 

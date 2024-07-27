@@ -109,4 +109,12 @@ public class Game extends JFrame {
             currentEnemyIndex = 0;
         }
     }
+
+    public int getCurrentEnemyIndex() {
+        return currentEnemyIndex;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
 }
