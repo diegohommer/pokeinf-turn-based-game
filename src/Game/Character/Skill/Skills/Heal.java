@@ -3,7 +3,7 @@ package Game.Character.Skill.Skills;
 import Game.Character.Character;
 import Game.Character.Skill.Skill;
 
-public class Cura extends Skill {
+public class Heal extends Skill {
 
     //atributos de efeito
     private int healPoints;
@@ -15,7 +15,7 @@ public class Cura extends Skill {
     private final int CURE_LEVEL_UP = 5;
     private final double HIT_CHANCE = 0.8;
 
-    public Cura(){
+    public Heal(){
         this.name="Cura";
         this.spritePath="assets//cureSkill.png";
         this.cost=INITIAL_COST;
@@ -36,22 +36,21 @@ public class Cura extends Skill {
     @Override
     public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
         if(this.didItHit()){
-            int curaAtual = this.getHealPoints();
-            int vidaAlvo  = casterCharacter.getLife();
-            int vidaMax = casterCharacter.getMaxLife();
+            int currentHeal = this.getHealPoints();
+            int targetLife = casterCharacter.getLife();
+            int maxLife = casterCharacter.getMaxLife();
 
-            vidaAlvo = vidaAlvo + curaAtual;
-            if(vidaAlvo > vidaMax){
-                vidaAlvo = vidaMax;
+            targetLife = targetLife + currentHeal;
+            if(targetLife > maxLife){
+                targetLife = maxLife;
             }
 
-            casterCharacter.setLife(vidaAlvo);
+            casterCharacter.setLife(targetLife);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-
     @Override
     public boolean upgradeEffect() {
         if(this.isMaxLevel()){
