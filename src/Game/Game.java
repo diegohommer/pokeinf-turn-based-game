@@ -64,14 +64,6 @@ public class Game extends JFrame {
             new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new Rest()))));
     }
 
-    public int getCurrentEnemyIndex() {
-        return currentEnemyIndex;
-    }
-
-    public ArrayList<Enemy> getEnemies() {
-        return enemies;
-    }
-
     public STATE getGameState(){
         return gameState;
     }
@@ -116,5 +108,13 @@ public class Game extends JFrame {
         {
             currentEnemyIndex = 0;
         }
+    }
+
+    public int getCurrentEnemyIndex() {
+        return currentEnemyIndex;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
 }
