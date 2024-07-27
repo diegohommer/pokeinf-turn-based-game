@@ -125,12 +125,7 @@ public class Battle extends Scene{
         continueButton.setBounds(BUTTON_X_POS + BUTTON_X_OFFSET * skillButtons.size(), BUTTON_Y_POS, BUTTON_WIDTH, BUTTON_HEIGHT);
 
         // Determine what the button does when it's clicked
-        continueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playerChooseSkill();
-            }
-        });
+        setContinueActionListener(() -> playerChooseSkill());
 
         add(continueButton);
     }
@@ -179,24 +174,13 @@ public class Battle extends Scene{
         playerInfoText.setText(player.GetInfoText());
         enemyInfoText.setText(enemy.GetInfoText());
 
-        continueButton.removeActionListener(continueButton.getActionListeners()[0]);
         if(enemy.isDead())
         {
-            continueButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    playerWon();
-                }
-            });
+            setContinueActionListener(() -> playerWon());
         }
         else
         {
-            continueButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    enemyPrepareMove();
-                }
-            });
+            setContinueActionListener(() -> enemyPrepareMove());
         }
         continueButton.setVisible(true);
 
@@ -209,13 +193,7 @@ public class Battle extends Scene{
     {
         battleText.setText("O inimigo se prepara para revidar!");
 
-        continueButton.removeActionListener(continueButton.getActionListeners()[0]);
-        continueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enemyMakeMove();
-            }
-        });
+        setContinueActionListener(() -> enemyMakeMove());
     }
 
     private void enemyMakeMove()
@@ -227,30 +205,23 @@ public class Battle extends Scene{
         playerInfoText.setText(player.GetInfoText());
         enemyInfoText.setText(enemy.GetInfoText());
 
-        continueButton.removeActionListener(continueButton.getActionListeners()[0]);
         if(player.isDead())
         {
-            continueButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    playerLost();
-                }
-            });
+            setContinueActionListener(() -> playerLost());
         }
         else
         {
-            continueButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    playerChooseSkill();
-                }
-            });
+            setContinueActionListener(() -> playerChooseSkill());
         }
     }
 
     private void playerWon()
     {
         battleText.setText("Você derrotou " + enemy.getName() + "!");
+
+        game.advanceEnemy();
+
+        setContinueActionListener(() -> terminateBattle());
 
         for (JButton skillButton : skillButtons) {
             skillButton.setVisible(false);
@@ -261,8 +232,31 @@ public class Battle extends Scene{
     {
         battleText.setText(enemy.getName() + " derrotou você!");
 
+        setContinueActionListener(() -> terminateBattle());
+
         for (JButton skillButton : skillButtons) {
             skillButton.setVisible(false);
         }
+    }
+
+    private void terminateBattle()
+    {
+        player.resetStatus();
+        enemy.resetStatus();
+        game.setGameState(Game.STATE.CHOOSE_SKILL);
+    }
+
+    private void setContinueActionListener(Runnable action)
+    {
+        for (ActionListener actionList : continueButton.getActionListeners()) {
+            continueButton.removeActionListener(actionList);
+        }
+
+        continueButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                action.run();
+            }
+        });
     }
 }

@@ -39,7 +39,7 @@ public class Game extends JFrame {
         setLayout(new BorderLayout());
         setPlayer(new Player(PLAYER_NAME));
         initEnemies();
-        setGameState(STATE.MENU);
+        setGameState(STATE.BATTLE);
     }
 
     public Player getPlayer(){
@@ -100,5 +100,13 @@ public class Game extends JFrame {
         }
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
+    }
+
+    public void advanceEnemy()
+    {
+        if(++currentEnemyIndex >= enemies.size())
+        {
+            currentEnemyIndex = 0;
+        }
     }
 }

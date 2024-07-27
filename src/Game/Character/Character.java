@@ -132,6 +132,13 @@ public abstract class Character {
         return this.getLife() == 0;
     }
 
+    public void resetStatus()
+    {
+        life = maxLife;
+        skillPoints = maxSkillPoints;
+        shield = 0;
+    }
+
     public String GetInfoText()
     {
         return "<html>" + 
