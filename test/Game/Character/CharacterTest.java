@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import Game.Character.Character;
+import Game.Character.Skill.Skill;
+import Game.Character.Skill.Skills.Heal;
 
 class CharacterTest {
     private Character character;
@@ -65,8 +67,8 @@ class CharacterTest {
 
     @Test
     void testDeleteSkill() {
-        Skill skill1 = new Skill(); // Assuming Skill class has a default constructor
-        Skill skill2 = new Skill();
+        Skill skill1 = new Heal(); // Assuming Skill class has a default constructor
+        Skill skill2 = new Heal();
 
         ArrayList<Skill> skills = new ArrayList<>();
         skills.add(skill1);
