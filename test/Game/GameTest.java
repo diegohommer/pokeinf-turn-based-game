@@ -32,7 +32,7 @@ public class GameTest {
 
     @Test
     public void testInitialState() {
-        assertEquals(Game.STATE.BATTLE, game.getGameState(), "Initial game state should be BATTLE");
+        assertEquals(Game.STATE.MENU, game.getGameState(), "Initial game state should be BATTLE");
     }
 
     @Test

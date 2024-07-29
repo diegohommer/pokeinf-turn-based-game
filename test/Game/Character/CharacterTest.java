@@ -1,7 +1,9 @@
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+
 import Game.Character.Character;
 import Game.Character.Skill.Skill;
 import Game.Character.Skill.Skills.Heal;
