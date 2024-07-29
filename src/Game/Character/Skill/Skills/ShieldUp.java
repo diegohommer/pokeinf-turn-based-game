@@ -24,7 +24,7 @@ public class ShieldUp extends Skill{
         super.setSkillLevel(INITIAL_LEVEL);
         super.setType(Skill.Type.SHIELD);
         this.setShieldGen(INITIAL_SHIELD_GEN);
-        this.description = "Receive " + getShieldGen() + " shield(s)";
+        updateDescription();
     }
 
     // getters && setters
@@ -71,7 +71,23 @@ public class ShieldUp extends Skill{
             this.setSkillLevel(currentLevel + 1);
             this.setShieldGen(currentShieldGen + 1);
             this.setCost(currentCost + LEVEL_UP_COST);
+            updateDescription();
             return true;
         }
+    }
+
+    @Override
+    public void resetLevel()
+    {
+        skillLevel = INITIAL_LEVEL;
+        cost = INITIAL_COST;
+        shieldPoints = INITIAL_SHIELD_GEN;
+        hitChance = INITIAL_HIT_CHANCE;
+        updateDescription();
+    }
+
+    private void updateDescription()
+    {
+        super.setDescription("Receive " + getShieldGen() + " shield(s).");
     }
 }

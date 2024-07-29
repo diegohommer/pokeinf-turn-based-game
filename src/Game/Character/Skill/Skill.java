@@ -26,6 +26,7 @@ public abstract class Skill {
     // abstract methods
     public abstract boolean applyEffect(Character casterCharacter, Character targetCharacter);
     public abstract boolean upgradeEffect();
+    public abstract void resetLevel();
 
     // getters && setters
     public String getSpritePath(){
@@ -103,5 +104,4 @@ public abstract class Skill {
         double randNum = Math.random(); // Random double between 0.0 and 1.0
         return randNum <= this.getHitChance();
     }
-
 }

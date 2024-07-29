@@ -30,9 +30,7 @@ public class MultiAttack extends Skill {
         this.setDamagePerHit(INITIAL_DAMAGE);
         this.setMaxAttacks(INITIAL_MAX_ATACKS);
         this.setType(Skill.Type.DAMAGE);
-        super.setDescription("Do a sequence of " + this.getMaxAttacks() + 
-                             " attacks that hit for " + this.damagePerHit + " damage each, with " + 
-                             (this.hitChance * PERCENTAGE) + "% chance to hit each one.");
+        updateDescription();
     }
 
     // getters && setters
@@ -111,8 +109,26 @@ public class MultiAttack extends Skill {
             this.setDamagePerHit(currentDamage + LEVEL_UP_DAMAGE);
             super.setCost(currentCost + LEVEL_UP_COST);
             super.setHitChance(currentHitChance + LEVEL_UP_HIT_CHANCE);
+            updateDescription();
             return true;
         }
     }
     
+    @Override
+    public void resetLevel()
+    {
+        skillLevel = INITIAL_LEVEL;
+        cost = INITIAL_COST;
+        damagePerHit = INITIAL_DAMAGE;
+        maxAttacks = INITIAL_MAX_ATACKS;
+        hitChance = INITIAL_HIT_CHANCE;
+        updateDescription();
+    }
+
+    private void updateDescription()
+    {
+        super.setDescription("Do a sequence of " + this.getMaxAttacks() + 
+                             " attacks that hit for " + this.damagePerHit + " damage each, with " + 
+                             (this.hitChance * PERCENTAGE) + "% chance to hit each one.");
+    }
 }

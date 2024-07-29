@@ -24,7 +24,7 @@ public class Rest extends Skill{
         super.setSkillLevel(INITIAL_LEVEL);
         this.setSPGen(INITIAL_SP_GEN);
         this.setType(Skill.Type.REST);
-        this.description = "Receive " + getSPGen() + " SP";
+        updateDescription();
     }
 
     // getters && setters
@@ -68,7 +68,23 @@ public class Rest extends Skill{
 
             this.setSkillLevel(currentLevel + 1);
             this.setSPGen(currentSPGen + LEVEL_UP_SP_GEN);
+            updateDescription();
             return true;
         }
+    }
+
+    @Override
+    public void resetLevel()
+    {
+        skillLevel = INITIAL_LEVEL;
+        cost = INITIAL_COST;
+        skillPointsGen = INITIAL_SP_GEN;
+        hitChance = INITIAL_HIT_CHANCE;
+        updateDescription();
+    }
+
+    private void updateDescription()
+    {
+        super.setDescription("Receive " + getSPGen() + " SP.");
     }
 }

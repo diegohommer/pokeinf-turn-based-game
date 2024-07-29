@@ -15,8 +15,8 @@ public class MainMenu extends Scene {
 
     private enum MenuAction {
         NEW_GAME,
-        LOAD_GAME,
-        SETTINGS,
+        // LOAD_GAME,
+        // SETTINGS,
         EXIT
     }
 
@@ -71,12 +71,12 @@ public class MainMenu extends Scene {
             case NEW_GAME:
                 game.setGameState(Game.STATE.CHOOSE_SKILL);
                 break;
-            case LOAD_GAME:
-                System.out.println("Load Game clicked");
-                break;
-            case SETTINGS:
-                game.setGameState(Game.STATE.SETTINGS);
-                break;
+            // case LOAD_GAME:
+            //     System.out.println("Load Game clicked");
+            //     break;
+            // case SETTINGS:
+            //     game.setGameState(Game.STATE.SETTINGS);
+            //     break;
             case EXIT:
                 System.exit(0);
                 break;

@@ -23,10 +23,10 @@ public class Game extends JFrame {
 
     public enum STATE {
         MENU,
-        SETTINGS,
+        //SETTINGS,
         BATTLE,
         CHOOSE_SKILL,
-        CHOOSE_BATTLE
+        //CHOOSE_BATTLE
     }
     private STATE gameState;
 
@@ -60,7 +60,7 @@ public class Game extends JFrame {
             "assets//pimenta.jpg", 
             "Pimenta", 
             100, 
-            60, 
+            50, 
             new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new Rest()))));
     }
 
@@ -85,18 +85,18 @@ public class Game extends JFrame {
             case MENU:
                 this.getContentPane().add(new MainMenu(this, MENU_BACKGROUND));
                 break;
-            case SETTINGS:
-                // Add CONFIGS panel
-                break;
+            // case SETTINGS:
+            //     // Add CONFIGS panel
+            //     break;
             case BATTLE:
                 this.getContentPane().add(new Battle(this, MENU_BACKGROUND, player, enemies.get(currentEnemyIndex)));
                 break;
             case CHOOSE_SKILL:
                 this.getContentPane().add(new ChooseSkill(this, getPlayer(), MENU_BACKGROUND));
                 break;
-            case CHOOSE_BATTLE:
-                // Add CHOOSE BATTLE panel
-                break;
+            // case CHOOSE_BATTLE:
+            //     // Add CHOOSE BATTLE panel
+            //     break;
         }
         this.getContentPane().revalidate();
         this.getContentPane().repaint();

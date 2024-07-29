@@ -27,8 +27,7 @@ public class QuickAttack extends Skill {
         super.setSkillLevel(INITIAL_LEVEL);
         this.setDamage(INITIAL_DAMAGE);
         this.setType(Skill.Type.DAMAGE);
-        this.description = "Attack for " + this.damage + " damage with a " + 
-                            (this.hitChance * PERCENTAGE) + "% chance to hit the target";
+        updateDescription();
     }
 
     public int getDamage(){
@@ -53,6 +52,7 @@ public class QuickAttack extends Skill {
             this.setSkillLevel(currentLevel + 1);
             this.setDamage(currentDamage + DAMAGE_LEVEL_UP);
             this.setCost(currentCost + COST_LEVEL_UP);
+            updateDescription();
             return true;
         }
     }
@@ -88,5 +88,21 @@ public class QuickAttack extends Skill {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void resetLevel()
+    {
+        skillLevel = INITIAL_LEVEL;
+        cost = INITIAL_COST;
+        damage = INITIAL_DAMAGE;
+        hitChance = INITIAL_HIT_CHANCE;
+        updateDescription();
+    }
+
+    private void updateDescription()
+    {
+        this.description = "Attack for " + this.damage + " damage with a " + 
+        (this.hitChance * PERCENTAGE) + "% chance to hit the target.";
     }
 }

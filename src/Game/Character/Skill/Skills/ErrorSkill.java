@@ -31,4 +31,11 @@ public class ErrorSkill extends Skill{
         return false;
     }
     
+    @Override
+    public void resetLevel()
+    {
+        skillLevel = INITIAL_LEVEL;
+        cost = INITIAL_COST;
+        hitChance = INITIAL_HIT_CHANCE;
+    }
 }

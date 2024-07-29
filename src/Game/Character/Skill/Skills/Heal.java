@@ -27,7 +27,7 @@ public class Heal extends Skill {
         super.setSkillLevel(INITIAL_LEVEL);
         this.setHealPoints(INITIAL_HEAL);
         this.setType(Skill.Type.HEALING);
-        super.setDescription("Heal for " + this.getHealPoints() + " HP");
+        updateDescription();
     }
     
     public int getHealPoints() {
@@ -73,8 +73,22 @@ public class Heal extends Skill {
             this.setSkillLevel(currentLevel + 1);
             this.setHealPoints(currentHealing + CURE_LEVEL_UP);
             this.setCost(currentCost + COST_LEVEL_UP);
+            updateDescription();
             return true;
         }
     }
     
+    @Override
+    public void resetLevel()
+    {
+        skillLevel = INITIAL_LEVEL;
+        cost = INITIAL_COST;
+        healPoints = INITIAL_HEAL;
+        updateDescription();
+    }
+
+    private void updateDescription()
+    {
+        super.setDescription("Heal for " + this.getHealPoints() + " HP.");
+    }
 }

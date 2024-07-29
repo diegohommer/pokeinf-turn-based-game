@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 import Game.Character.Skill.Skill;
-import Game.Character.Skill.Skills.ErrorSkill;
 
 public class Enemy extends Character
 {

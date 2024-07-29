@@ -140,9 +140,9 @@ public abstract class Character {
     {
         return "<html>" + 
         name + 
-        "<br>Vida: " + Integer.toString(life) +
-        "<br>Pontos de habilidade: " + Integer.toString(skillPoints) +
-        "<br>Escudos: " + Integer.toString(shield) + 
+        "<br>Life: " + Integer.toString(life) +
+        "<br>Skill Points: " + Integer.toString(skillPoints) +
+        "<br>Shield: " + Integer.toString(shield) + 
         "</html>";
     }
 }
