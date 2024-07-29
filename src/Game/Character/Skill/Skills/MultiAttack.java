@@ -86,7 +86,6 @@ public class MultiAttack extends Skill {
             
                     targetCharacter.setShield(targetShield);
                     targetCharacter.setLife(targetHealth);
-                    System.out.println(targetCharacter.getLife());
                 }
                 return true;
             }
