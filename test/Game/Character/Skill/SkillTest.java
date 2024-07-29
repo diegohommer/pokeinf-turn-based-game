@@ -95,7 +95,6 @@ public class SkillTest {
 
     @Test
     public void testGetType() {
-        System.out.println(Skill.Type.DAMAGE);
         assertEquals(Skill.Type.DAMAGE, skill.getType(), "Initial type should be DAMAGE");
     }
 
