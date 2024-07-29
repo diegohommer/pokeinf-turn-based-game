@@ -82,6 +82,6 @@ public class MultiAttackTest {
         assertEquals(5, multiAttackSkill.getSkillLevel(), "Skill level should be 5 at max level"); // Assuming 5 is the max level
         assertEquals(35, multiAttackSkill.getDamagePerHit(), "Damage per hit should be 35 at max level"); // 15 + (4 * 5)
         assertEquals(30, multiAttackSkill.getCost(), "Skill cost should be 30 at max level"); // 10 + (4 * 5)
-        assertEquals(0.7, multiAttackSkill.getHitChance(), "Hit chance should be 0.8 at max level"); // 0.5 + (4 * 0.05)
+        assertEquals(0.7, multiAttackSkill.getHitChance(), 0.001, "Hit chance should be 0.8 at max level"); // 0.5 + (4 * 0.05)
     }
 }

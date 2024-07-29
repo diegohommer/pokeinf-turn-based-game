@@ -24,23 +24,24 @@ public class QuickAttackTest {
     }
 
     @Test
-    public void testApplyEffectWithShield() {
-        boolean result = quickAttackSkill.applyEffect(caster, target);
-
-        assertTrue(result, "Attack should be successful");
-        int expectedLife = Math.max(0, target.getLife() - quickAttackSkill.getDamage());
-        assertEquals(expectedLife, target.getLife(), "Target's life should be reduced by the damage amount");
-        assertEquals(9, target.getShield(), "Target's shield should be reduced by 1");
-    }
-
-    @Test
-    public void testApplyEffectWithNoShield() {
+    public void testApplyEffectSucess() {
         int expectedLife = Math.max(0, target.getLife() - quickAttackSkill.getDamage());
         boolean result = quickAttackSkill.applyEffect(caster, target);
 
         assertTrue(result, "Attack should be successful");
         assertEquals(expectedLife, target.getLife(), "Target's life should be reduced by the damage amount");
         assertEquals(0, target.getShield(), "Target's shield should remain 0");
+    }
+
+    @Test
+    public void testApplyEffectWithShield() {
+        int expectedLife = target.getLife();
+        target.setShield(10); // Set shield to 10
+        boolean result = quickAttackSkill.applyEffect(caster, target);
+
+        assertTrue(result, "Attack should be successful");
+        assertEquals(expectedLife, target.getLife(), "Target's life should be reduced by the damage amount");
+        assertEquals(9, target.getShield(), "Target's shield should be reduced by 1");
     }
 
     @Test
@@ -64,5 +65,13 @@ public class QuickAttackTest {
         assertEquals(5, quickAttackSkill.getSkillLevel(), "Skill level should be 5 at max level"); // Assuming 5 is the max level
         assertEquals(40, quickAttackSkill.getDamage(), "Damage should be 40 at max level"); // 20 + (4 * 5)
         assertEquals(13, quickAttackSkill.getCost(), "Skill cost should be 13 at max level"); // 5 + (4 * 2)
+    }
+
+    @Test
+    public void testApplyEffectInsufficientSkillPoints() {
+        caster.setSkillPoints(0); // Insufficient skill points
+        boolean result = quickAttackSkill.applyEffect(caster, target);
+
+        assertFalse(result, "Quick-Attack should fail with insufficient skill points");
     }
 }

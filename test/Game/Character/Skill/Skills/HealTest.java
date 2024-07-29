@@ -17,6 +17,7 @@ import Game.Character.Skill.Skills.Heal;
         player = new Player("Healer");
 
         // Set the initial life points to a value less than the max to test healing
+        player.setSkillPoints(20);
         player.setLife(50);
     }
 
@@ -46,6 +47,15 @@ import Game.Character.Skill.Skills.Heal;
         assertEquals(2, healSkill.getSkillLevel(), "Skill level should be 2 after upgrade");
         assertEquals(30, healSkill.getHealPoints(), "Heal points should be 30 after upgrade"); // 25 + 5
         assertEquals(8, healSkill.getCost(), "Skill cost should be 8 after upgrade"); // 5 + 3
+    }
+
+    @Test
+    public void testApplyEffectInsufficientSkillPoints() {
+        player.setSkillPoints(0); // Insufficient skill points
+        boolean result = healSkill.applyEffect(player, player);
+
+        assertFalse(result, "Heal should fail with insufficient skill points");
+        assertEquals(50, player.getLife(), "Player's life should remain unchanged");
     }
 
     @Test
