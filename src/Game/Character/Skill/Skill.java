@@ -32,6 +32,7 @@ public abstract class Skill {
     public String getSpritePath(){
         return this.spritePath;
     }
+
     public boolean setSpritePath(String spritePath){
         if (spritePath != null && !spritePath.isEmpty()) {
             this.spritePath = spritePath;
@@ -43,6 +44,7 @@ public abstract class Skill {
     public String getName() {
         return this.name;
     }
+    
     public boolean setName(String name) {
         if (name != null && !name.isEmpty()) {
             this.name = name;
@@ -54,6 +56,7 @@ public abstract class Skill {
     public String getDescription(){
         return this.description;
     }
+
     public boolean setDescription(String description){
         if (description != null && !description.isEmpty()) {
             this.description = description;
@@ -65,6 +68,7 @@ public abstract class Skill {
     public int getSkillLevel(){
         return this.skillLevel;
     }
+
     public void setSkillLevel(int level){
         int clampedSkillLevel = Math.max(1, Math.min(MAX_LEVEL, level));
         this.skillLevel = clampedSkillLevel;
@@ -73,6 +77,7 @@ public abstract class Skill {
     public int getCost(){
         return this.cost;
     }
+
     public void setCost(int newCost){
         int clampedCost = Math.max(0, newCost);
         this.cost = clampedCost;
@@ -81,17 +86,17 @@ public abstract class Skill {
     public double getHitChance() {
         return hitChance;
     }
+
     public void setHitChance(double hitChance) {
         double clampedHitChance = Math.max(0.0, Math.min(1.0, hitChance));
         this.hitChance = clampedHitChance;
     }
 
-    public Type getType()
-    {
+    public Type getType(){
         return type;
     }
-    protected void setType(Type t)
-    {
+
+    protected void setType(Type t){
         type = t;
     }
 

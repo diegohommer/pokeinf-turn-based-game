@@ -15,6 +15,8 @@ public class TestSkill extends Skill {
     }
 
     private static final int MAX_LEVEL = 5;
+    private final int INITIAL_COST = 5;
+    private final int INITIAL_LEVEL = 1;
 
     @Override
     public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
@@ -36,5 +38,12 @@ public class TestSkill extends Skill {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void resetLevel()
+    {
+        skillLevel = INITIAL_LEVEL;
+        cost = INITIAL_COST;
     }
 }

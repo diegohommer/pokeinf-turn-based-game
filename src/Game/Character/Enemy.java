@@ -9,7 +9,6 @@ import Game.Character.Skill.Skill;
 
 public class Enemy extends Character
 {
-    private int difficulty;
     private static final int MAX_SHIELD = 3;
     private Map<Skill.Type, ArrayList<Skill>> skillsByType = new HashMap<Skill.Type, ArrayList<Skill>>();
 
