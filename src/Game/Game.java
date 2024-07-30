@@ -92,7 +92,7 @@ public class Game extends JFrame {
                 this.getContentPane().add(new Battle(this, MENU_BACKGROUND, player, enemies.get(currentEnemyIndex)));
                 break;
             case CHOOSE_SKILL:
-                this.getContentPane().add(new ChooseSkill(this, getPlayer(), MENU_BACKGROUND));
+                this.getContentPane().add(new UpgradeSkill(this, getPlayer(), MENU_BACKGROUND));
                 break;
             // case CHOOSE_BATTLE:
             //     // Add CHOOSE BATTLE panel

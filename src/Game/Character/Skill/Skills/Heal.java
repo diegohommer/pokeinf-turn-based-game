@@ -46,19 +46,18 @@ public class Heal extends Skill {
         if(casterSP >= skillCost){
             casterCharacter.setSkillPoints(casterSP - skillCost);
             
-            int currentHeal = this.getHealPoints();
-            int targetLife = casterCharacter.getLife();
-            int maxLife = casterCharacter.getMaxLife();
+            if(this.didItHit()){
+                int currentHeal = this.getHealPoints();
+                int targetLife = casterCharacter.getLife();
+    
+                targetLife = targetLife + currentHeal;   
+                casterCharacter.setLife(targetLife);
+                return true;
+            }else
+                return false; // Missed heal
 
-            targetLife = targetLife + currentHeal;
-            if(targetLife > maxLife){
-                targetLife = maxLife;
-            }
-
-            casterCharacter.setLife(targetLife);
-            return true;
         } else {
-            return false;
+            return false; // Insufficient SP
         }
     }
     @Override

@@ -59,13 +59,13 @@ public class QuickAttack extends Skill {
 
     @Override
     public boolean applyEffect(Character casterCharacter, Character targetCharacter) {
-        if (this.didItHit()) {
-            int casterSP = casterCharacter.getSkillPoints();
-            int skillCost = super.getCost();
-    
-            if(casterSP >= skillCost){
-                casterCharacter.setSkillPoints(casterSP - skillCost);
+        int casterSP = casterCharacter.getSkillPoints();
+        int skillCost = super.getCost();
+
+        if (casterSP >= skillCost) {
+            casterCharacter.setSkillPoints(casterSP - skillCost);
             
+            if(this.didItHit()){            
                 int currentDamage = this.getDamage();
                 int targetShield = targetCharacter.getShield();
                 int targetLife = targetCharacter.getLife();
@@ -83,10 +83,10 @@ public class QuickAttack extends Skill {
                 targetCharacter.setLife(targetLife);
                 return true;
             } else {
-                return false;
+                return false; // Missed attack
             }
         } else {
-            return false;
+            return false; // Insufficient SP
         }
     }
 
