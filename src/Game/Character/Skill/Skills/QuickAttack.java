@@ -103,6 +103,6 @@ public class QuickAttack extends Skill {
     private void updateDescription()
     {
         this.description = "Attack for " + this.damage + " damage with a " + 
-        (this.hitChance * PERCENTAGE) + "% chance to hit the target.";
+        (int)(this.hitChance * PERCENTAGE) + "% chance to hit the target.";
     }
 }

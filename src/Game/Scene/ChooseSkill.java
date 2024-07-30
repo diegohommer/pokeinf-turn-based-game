@@ -8,7 +8,7 @@ import Game.Scene.UI.SkillCard;
 import java.util.ArrayList;
 import java.awt.FlowLayout;
 
-public class UpgradeSkill extends Scene {    
+public class ChooseSkill extends Scene {    
     private static final int HOR_GAP = 50;
     private static final int VER_GAP = 100;
     
@@ -16,7 +16,7 @@ public class UpgradeSkill extends Scene {
     private Player player;
     private Game game;
 
-    public UpgradeSkill(Game game, Player player, String spritePath){
+    public ChooseSkill(Game game, Player player, String spritePath){
         super(spritePath);
         this.player = player;
         this.game = game;

@@ -15,7 +15,7 @@ public class Game extends JFrame {
     public final int WINDOW_HEIGHT = Scene.WINDOW_HEIGHT;
     private final String PLAYER_NAME = "Dennis";
 
-    private final String MENU_BACKGROUND = "assets//test_background.jpg";
+    private final String MENU_BACKGROUND = "assets//test_background_.jpg";
     private Player player;
     private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
@@ -62,6 +62,13 @@ public class Game extends JFrame {
             100, 
             50, 
             new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new Rest()))));
+
+        enemies.add(new Enemy(
+            "assets//ingrid.png", 
+            "Ingrid", 
+            110, 
+            60, 
+            new ArrayList<>(Arrays.asList(new QuickAttack(), new MultiAttack(), new Heal(), new Rest()))));
     }
 
     public STATE getGameState(){
@@ -92,7 +99,7 @@ public class Game extends JFrame {
                 this.getContentPane().add(new Battle(this, MENU_BACKGROUND, player, enemies.get(currentEnemyIndex)));
                 break;
             case CHOOSE_SKILL:
-                this.getContentPane().add(new UpgradeSkill(this, getPlayer(), MENU_BACKGROUND));
+                this.getContentPane().add(new ChooseSkill(this, getPlayer(), MENU_BACKGROUND));
                 break;
             // case CHOOSE_BATTLE:
             //     // Add CHOOSE BATTLE panel
